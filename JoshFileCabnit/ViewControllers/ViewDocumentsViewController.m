@@ -7,6 +7,7 @@
 //
 
 #import "ViewDocumentsViewController.h"
+#import "FolderViewController.h"
 
 
 @interface ViewDocumentsViewController () <UIWebViewDelegate, UITableViewDelegate, UITableViewDataSource>
@@ -18,7 +19,8 @@
 
 @implementation ViewDocumentsViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     NSString *path = [[NSBundle mainBundle] pathForResource:@"TestPDF" ofType:@"pdf"];
     NSURL *targetURL = [NSURL fileURLWithPath:path];
@@ -34,9 +36,30 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"ViewDocumentsCellID"];
+    if (indexPath.row == 0) {
     cell.textLabel.text = @"Tax Return";
+    }
+    else if(indexPath.row == 1)
+    {
+        cell.textLabel.text = @"Bank info";
+
+    }
+    else
+    {
+        cell.textLabel.text = @"Assests";
+
+    }
     return cell;
 }
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(UITableViewCell*)sender
+{
+    FolderViewController* folderVC = segue.destinationViewController;
+    folderVC.title = sender.textLabel.text;
+    
+}
+
+
 
 //- (void)webViewDidFinishLoad:(UIWebView *)webView
 //{

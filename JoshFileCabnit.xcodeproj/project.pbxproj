@@ -17,6 +17,8 @@
 		561A7F3019AB973900A7006C /* UploadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 561A7F2F19AB973800A7006C /* UploadViewController.m */; };
 		561A7F3319AB979B00A7006C /* ViewDocumentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 561A7F3219AB979B00A7006C /* ViewDocumentsViewController.m */; };
 		561A7F3719AB982700A7006C /* CheckListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 561A7F3619AB982700A7006C /* CheckListViewController.m */; };
+		56438AF419ACFED300E8BF39 /* FolderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 56438AF319ACFED300E8BF39 /* FolderViewController.m */; };
+		56438AF819AD04FC00E8BF39 /* FileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 56438AF719AD04FC00E8BF39 /* FileViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,10 @@
 		561A7F3419AB97B000A7006C /* ViewDocumentsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewDocumentsViewController.h; sourceTree = "<group>"; };
 		561A7F3519AB981900A7006C /* CheckListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CheckListViewController.h; sourceTree = "<group>"; };
 		561A7F3619AB982700A7006C /* CheckListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckListViewController.m; sourceTree = "<group>"; };
+		56438AF319ACFED300E8BF39 /* FolderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderViewController.m; sourceTree = "<group>"; };
+		56438AF519ACFF0100E8BF39 /* FolderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FolderViewController.h; sourceTree = "<group>"; };
+		56438AF619AD04EE00E8BF39 /* FileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileViewController.h; sourceTree = "<group>"; };
+		56438AF719AD04FC00E8BF39 /* FileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +144,10 @@
 				561A7F3219AB979B00A7006C /* ViewDocumentsViewController.m */,
 				561A7F2E19AB971C00A7006C /* UploadViewController.h */,
 				561A7F2F19AB973800A7006C /* UploadViewController.m */,
+				56438AF519ACFF0100E8BF39 /* FolderViewController.h */,
+				56438AF319ACFED300E8BF39 /* FolderViewController.m */,
+				56438AF619AD04EE00E8BF39 /* FileViewController.h */,
+				56438AF719AD04FC00E8BF39 /* FileViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -243,10 +253,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				561A7F3319AB979B00A7006C /* ViewDocumentsViewController.m in Sources */,
+				56438AF419ACFED300E8BF39 /* FolderViewController.m in Sources */,
 				561A7F1319AB8D4400A7006C /* MainViewController.m in Sources */,
 				561A7F3019AB973900A7006C /* UploadViewController.m in Sources */,
 				561A7F1019AB8D4400A7006C /* AppDelegate.m in Sources */,
 				561A7F0D19AB8D4400A7006C /* main.m in Sources */,
+				56438AF819AD04FC00E8BF39 /* FileViewController.m in Sources */,
 				561A7F3719AB982700A7006C /* CheckListViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

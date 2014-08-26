@@ -32,7 +32,7 @@
     [super viewDidLoad];
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
-    self.viewDocumentsViewController = [storyboard instantiateViewControllerWithIdentifier:@"ViewDocumentsViewController"];
+    self.viewDocumentsViewController = [storyboard instantiateViewControllerWithIdentifier:@"ViewNavBar"];
     self.uploadViewController = [storyboard instantiateViewControllerWithIdentifier:@"UploadViewController"];
     self.checkListViewController = [storyboard instantiateViewControllerWithIdentifier:@"CheckListViewController"];
 
