@@ -35,21 +35,30 @@
     self.viewDocumentsViewController = [storyboard instantiateViewControllerWithIdentifier:@"ViewNavBar"];
     self.uploadViewController = [storyboard instantiateViewControllerWithIdentifier:@"UploadViewController"];
     self.checkListViewController = [storyboard instantiateViewControllerWithIdentifier:@"CheckListViewController"];
+    
 
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    self.viewDocumentsViewController.view.frame = CGRectMake(self.viewDocumentsViewController.view.frame.origin.x, self.viewDocumentsViewController.view.frame.origin.y, self.viewDocumentsViewController.view.frame.size.width, 364);
-    self.uploadViewController.view.frame = CGRectMake(self.uploadViewController.view.frame.origin.x, self.uploadViewController.view.frame.origin.y, self.uploadViewController.view.frame.size.width, 364);
-    self.checkListViewController.view.frame = CGRectMake(self.checkListViewController.view.frame.origin.x, self.checkListViewController.view.frame.origin.y, self.checkListViewController.view.frame.size.width, 364);
     CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
-    if (screenRect.size.height == 568)
+    NSLog(@"%f",screenRect.size.height);
+    if (screenRect.size.height == 548)
     {
+        self.viewDocumentsViewController.view.frame = CGRectMake(self.viewDocumentsViewController.view.frame.origin.x, self.viewDocumentsViewController.view.frame.origin.y, self.viewDocumentsViewController.view.frame.size.width, 479);
+        self.uploadViewController.view.frame = CGRectMake(self.uploadViewController.view.frame.origin.x, self.uploadViewController.view.frame.origin.y, self.uploadViewController.view.frame.size.width, 479);
+        self.checkListViewController.view.frame = CGRectMake(self.checkListViewController.view.frame.origin.x, self.checkListViewController.view.frame.origin.y, self.checkListViewController.view.frame.size.width, 479);
+        
         self.containterView.frame = CGRectMake(self.containterView.frame.origin.x, self.containterView.frame.origin.y, self.containterView.frame.size.width, (self.containterView.frame.size.height + 88));
         self.legendButton.frame = CGRectMake(self.legendButton.frame.origin.x, (self.legendButton.frame.origin.y + 88), self.legendButton.frame.size.width, self.legendButton.frame.size.height);
         self.helpFAQButton.frame = CGRectMake(self.helpFAQButton.frame.origin.x, (self.helpFAQButton.frame.origin.y + 88), self.helpFAQButton.frame.size.width, self.helpFAQButton.frame.size.height);
         self.privacyButton.frame = CGRectMake(self.privacyButton.frame.origin.x, (self.privacyButton.frame.origin.y + 88), self.privacyButton.frame.size.width, self.privacyButton.frame.size.height);
+    }
+    else
+    {
+        self.viewDocumentsViewController.view.frame = CGRectMake(self.viewDocumentsViewController.view.frame.origin.x, self.viewDocumentsViewController.view.frame.origin.y, self.viewDocumentsViewController.view.frame.size.width, 391);
+        self.uploadViewController.view.frame = CGRectMake(self.uploadViewController.view.frame.origin.x, self.uploadViewController.view.frame.origin.y, self.uploadViewController.view.frame.size.width, 391);
+        self.checkListViewController.view.frame = CGRectMake(self.checkListViewController.view.frame.origin.x, self.checkListViewController.view.frame.origin.y, self.checkListViewController.view.frame.size.width, 391);
     }
 }
 
@@ -72,9 +81,9 @@
         default:
             break;
     }
-    NSLog(@"%f", self.containterView.frame.size.height);
+    NSLog(@"container %f", self.containterView.frame.size.height);
     UIView* view = self.containterView.subviews.firstObject;
-    NSLog(@"%f", view.frame.size.height);
+    NSLog(@"subview %f", view.frame.size.height);
 }
 
 -(void)showViewDocumentsVC
