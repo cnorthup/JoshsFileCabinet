@@ -7,12 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		560915DB19ACE7D1005071DD /* TestPDF.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 560915DA19ACE7D1005071DD /* TestPDF.pdf */; };
 		561A7F0D19AB8D4400A7006C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 561A7F0C19AB8D4400A7006C /* main.m */; };
 		561A7F1019AB8D4400A7006C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 561A7F0F19AB8D4400A7006C /* AppDelegate.m */; };
-		561A7F1319AB8D4400A7006C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 561A7F1219AB8D4400A7006C /* ViewController.m */; };
+		561A7F1319AB8D4400A7006C /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 561A7F1219AB8D4400A7006C /* MainViewController.m */; };
 		561A7F1619AB8D4400A7006C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 561A7F1419AB8D4400A7006C /* Main.storyboard */; };
 		561A7F1819AB8D4400A7006C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 561A7F1719AB8D4400A7006C /* Images.xcassets */; };
 		561A7F2419AB8D4400A7006C /* JoshFileCabnitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 561A7F2319AB8D4400A7006C /* JoshFileCabnitTests.m */; };
+		561A7F3019AB973900A7006C /* UploadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 561A7F2F19AB973800A7006C /* UploadViewController.m */; };
+		561A7F3319AB979B00A7006C /* ViewDocumentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 561A7F3219AB979B00A7006C /* ViewDocumentsViewController.m */; };
+		561A7F3719AB982700A7006C /* CheckListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 561A7F3619AB982700A7006C /* CheckListViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,18 +30,25 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		560915DA19ACE7D1005071DD /* TestPDF.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = TestPDF.pdf; path = "../../../Library/Mobile Documents/com~apple~Preview/Documents/TestPDF.pdf"; sourceTree = "<group>"; };
 		561A7F0719AB8D4400A7006C /* JoshFileCabnit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JoshFileCabnit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		561A7F0B19AB8D4400A7006C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		561A7F0C19AB8D4400A7006C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		561A7F0E19AB8D4400A7006C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		561A7F0F19AB8D4400A7006C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		561A7F1119AB8D4400A7006C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		561A7F1219AB8D4400A7006C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		561A7F1119AB8D4400A7006C /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MainViewController.h; path = ../MainViewController.h; sourceTree = "<group>"; };
+		561A7F1219AB8D4400A7006C /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MainViewController.m; path = ../MainViewController.m; sourceTree = "<group>"; };
 		561A7F1519AB8D4400A7006C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		561A7F1719AB8D4400A7006C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		561A7F1D19AB8D4400A7006C /* JoshFileCabnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JoshFileCabnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		561A7F2219AB8D4400A7006C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		561A7F2319AB8D4400A7006C /* JoshFileCabnitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JoshFileCabnitTests.m; sourceTree = "<group>"; };
+		561A7F2E19AB971C00A7006C /* UploadViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UploadViewController.h; sourceTree = "<group>"; };
+		561A7F2F19AB973800A7006C /* UploadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadViewController.m; sourceTree = "<group>"; };
+		561A7F3219AB979B00A7006C /* ViewDocumentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewDocumentsViewController.m; sourceTree = "<group>"; };
+		561A7F3419AB97B000A7006C /* ViewDocumentsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewDocumentsViewController.h; sourceTree = "<group>"; };
+		561A7F3519AB981900A7006C /* CheckListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CheckListViewController.h; sourceTree = "<group>"; };
+		561A7F3619AB982700A7006C /* CheckListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckListViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,12 +90,12 @@
 		561A7F0919AB8D4400A7006C /* JoshFileCabnit */ = {
 			isa = PBXGroup;
 			children = (
+				560915DA19ACE7D1005071DD /* TestPDF.pdf */,
 				561A7F0E19AB8D4400A7006C /* AppDelegate.h */,
 				561A7F0F19AB8D4400A7006C /* AppDelegate.m */,
-				561A7F1119AB8D4400A7006C /* ViewController.h */,
-				561A7F1219AB8D4400A7006C /* ViewController.m */,
 				561A7F1419AB8D4400A7006C /* Main.storyboard */,
 				561A7F1719AB8D4400A7006C /* Images.xcassets */,
+				561A7F2D19AB8DC700A7006C /* ViewControllers */,
 				561A7F0A19AB8D4400A7006C /* Supporting Files */,
 			);
 			path = JoshFileCabnit;
@@ -114,6 +125,21 @@
 				561A7F2219AB8D4400A7006C /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		561A7F2D19AB8DC700A7006C /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				561A7F3519AB981900A7006C /* CheckListViewController.h */,
+				561A7F3619AB982700A7006C /* CheckListViewController.m */,
+				561A7F1119AB8D4400A7006C /* MainViewController.h */,
+				561A7F1219AB8D4400A7006C /* MainViewController.m */,
+				561A7F3419AB97B000A7006C /* ViewDocumentsViewController.h */,
+				561A7F3219AB979B00A7006C /* ViewDocumentsViewController.m */,
+				561A7F2E19AB971C00A7006C /* UploadViewController.h */,
+				561A7F2F19AB973800A7006C /* UploadViewController.m */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -198,6 +224,7 @@
 			files = (
 				561A7F1619AB8D4400A7006C /* Main.storyboard in Resources */,
 				561A7F1819AB8D4400A7006C /* Images.xcassets in Resources */,
+				560915DB19ACE7D1005071DD /* TestPDF.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,9 +242,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				561A7F1319AB8D4400A7006C /* ViewController.m in Sources */,
+				561A7F3319AB979B00A7006C /* ViewDocumentsViewController.m in Sources */,
+				561A7F1319AB8D4400A7006C /* MainViewController.m in Sources */,
+				561A7F3019AB973900A7006C /* UploadViewController.m in Sources */,
 				561A7F1019AB8D4400A7006C /* AppDelegate.m in Sources */,
 				561A7F0D19AB8D4400A7006C /* main.m in Sources */,
+				561A7F3719AB982700A7006C /* CheckListViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -404,6 +434,7 @@
 				561A7F2919AB8D4400A7006C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		561A7F2A19AB8D4400A7006C /* Build configuration list for PBXNativeTarget "JoshFileCabnitTests" */ = {
 			isa = XCConfigurationList;
@@ -412,6 +443,7 @@
 				561A7F2C19AB8D4400A7006C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

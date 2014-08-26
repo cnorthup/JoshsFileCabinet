@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  UploadViewController.h
 //  JoshFileCabnit
 //
 //  Created by Charles Northup on 8/25/14.
@@ -8,8 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface UploadViewController : UIViewController
 
 
 @end
-
