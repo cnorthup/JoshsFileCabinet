@@ -200,7 +200,6 @@
                                 </connections>
                             </textView>
                         </subviews>
-                        <color key="backgroundColor" red="0.86274516582489014" green="0.16470588743686676" blue="0.95294123888015747" alpha="1" colorSpace="deviceRGB"/>
                         <constraints>
                             <constraint firstItem="GQC-Qt-GE7" firstAttribute="top" secondItem="USr-Nm-KEZ" secondAttribute="bottom" constant="20" id="ZgU-HO-69D"/>
                             <constraint firstItem="USr-Nm-KEZ" firstAttribute="top" secondItem="2sk-7u-CGX" secondAttribute="bottom" constant="8" id="mpI-Cl-AOe"/>

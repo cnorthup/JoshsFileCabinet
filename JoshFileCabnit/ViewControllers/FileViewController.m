@@ -9,7 +9,7 @@
 #import "FileViewController.h"
 
 
-@interface FileViewController () <UIWebViewDelegate, UIDocumentInteractionControllerDelegate>
+@interface FileViewController () <UIWebViewDelegate, UIDocumentInteractionControllerDelegate, UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIWebView *myWebView;
 @property (weak, nonatomic) IBOutlet UITextField *folderNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *fileNameTextField;
@@ -60,7 +60,7 @@
         case 0:
             [self showFile];
             self.saveButton.hidden = YES;
-            self.memoTextView.editable = NO;
+            self.memoTextView.editable = NO;    
             self.fileNameTextField.enabled = NO;
             self.folderNameTextField.enabled = NO;
             break;
@@ -82,6 +82,17 @@
             
         default:
             break;
+    }
+}
+
+-(void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    if (textField == self.folderNameTextField) {
+        
+    }
+    else if (textField == self.fileNameTextField)
+    {
+        
     }
 }
 
