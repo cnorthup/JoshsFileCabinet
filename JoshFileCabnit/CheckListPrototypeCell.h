@@ -10,4 +10,8 @@
 
 @interface CheckListPrototypeCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *cellTitle;
+@property (weak, nonatomic) IBOutlet UITextView *instructionsTextView;
+@property BOOL completed;
+
 @end
