@@ -17,6 +17,7 @@
 		561A7F3019AB973900A7006C /* UploadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 561A7F2F19AB973800A7006C /* UploadViewController.m */; };
 		561A7F3319AB979B00A7006C /* ViewDocumentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 561A7F3219AB979B00A7006C /* ViewDocumentsViewController.m */; };
 		561A7F3719AB982700A7006C /* CheckListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 561A7F3619AB982700A7006C /* CheckListViewController.m */; };
+		5623892119AFBE0B008D9652 /* CheckListPrototypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5623892019AFBE0B008D9652 /* CheckListPrototypeCell.m */; };
 		56438AF419ACFED300E8BF39 /* FolderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 56438AF319ACFED300E8BF39 /* FolderViewController.m */; };
 		56438AF819AD04FC00E8BF39 /* FileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 56438AF719AD04FC00E8BF39 /* FileViewController.m */; };
 /* End PBXBuildFile section */
@@ -51,6 +52,8 @@
 		561A7F3419AB97B000A7006C /* ViewDocumentsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewDocumentsViewController.h; sourceTree = "<group>"; };
 		561A7F3519AB981900A7006C /* CheckListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CheckListViewController.h; sourceTree = "<group>"; };
 		561A7F3619AB982700A7006C /* CheckListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckListViewController.m; sourceTree = "<group>"; };
+		5623892019AFBE0B008D9652 /* CheckListPrototypeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckListPrototypeCell.m; sourceTree = "<group>"; };
+		5623892219AFBE1F008D9652 /* CheckListPrototypeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CheckListPrototypeCell.h; sourceTree = "<group>"; };
 		56438AF319ACFED300E8BF39 /* FolderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderViewController.m; sourceTree = "<group>"; };
 		56438AF519ACFF0100E8BF39 /* FolderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FolderViewController.h; sourceTree = "<group>"; };
 		56438AF619AD04EE00E8BF39 /* FileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileViewController.h; sourceTree = "<group>"; };
@@ -102,6 +105,7 @@
 				561A7F1419AB8D4400A7006C /* Main.storyboard */,
 				561A7F1719AB8D4400A7006C /* Images.xcassets */,
 				561A7F2D19AB8DC700A7006C /* ViewControllers */,
+				5623891F19AFBDDA008D9652 /* TableViewCells */,
 				561A7F0A19AB8D4400A7006C /* Supporting Files */,
 			);
 			path = JoshFileCabnit;
@@ -150,6 +154,15 @@
 				56438AF719AD04FC00E8BF39 /* FileViewController.m */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		5623891F19AFBDDA008D9652 /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				5623892219AFBE1F008D9652 /* CheckListPrototypeCell.h */,
+				5623892019AFBE0B008D9652 /* CheckListPrototypeCell.m */,
+			);
+			name = TableViewCells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -252,6 +265,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5623892119AFBE0B008D9652 /* CheckListPrototypeCell.m in Sources */,
 				561A7F3319AB979B00A7006C /* ViewDocumentsViewController.m in Sources */,
 				56438AF419ACFED300E8BF39 /* FolderViewController.m in Sources */,
 				561A7F1319AB8D4400A7006C /* MainViewController.m in Sources */,

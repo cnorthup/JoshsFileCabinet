@@ -7,9 +7,11 @@
 //
 
 #import "CheckListViewController.h"
+#import "CheckListPrototypeCell.h"
 
 @interface CheckListViewController () <UITableViewDataSource, UITableViewDelegate>
 
+@property NSMutableArray* toDoList;
 
 @end
 
@@ -17,11 +19,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.toDoList = [NSMutableArray new];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return nil;
+    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"CheckListReuseCellID"];
+    cell.textLabel.text = [self.toDoList objectAtIndex:indexPath.row][@"title"];
+    return cell;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
