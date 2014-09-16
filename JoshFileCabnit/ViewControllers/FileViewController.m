@@ -58,9 +58,8 @@
 {
     switch (sender.selectedSegmentIndex) {
         case 0:
-            [self showFile];
             self.saveButton.hidden = YES;
-            self.memoTextView.editable = NO;    
+            self.memoTextView.editable = NO;
             self.fileNameTextField.enabled = NO;
             self.folderNameTextField.enabled = NO;
             break;
@@ -73,11 +72,11 @@
             break;
             
         case 2:
+            [self showFile];
             self.saveButton.hidden = YES;
             self.memoTextView.editable = NO;
             self.fileNameTextField.enabled = NO;
             self.folderNameTextField.enabled = NO;
-            
             break;
             
         default:
@@ -87,7 +86,8 @@
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    if (textField == self.folderNameTextField) {
+    if (textField == self.folderNameTextField)
+    {
         
     }
     else if (textField == self.fileNameTextField)

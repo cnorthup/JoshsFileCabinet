@@ -17,18 +17,39 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
 }
 
-- (IBAction)onTakePhotoButtonPressed:(id)sender
+-(void)documentPicker:(UIDocumentPickerViewController *)controller didPickDocumentAtURL:(NSURL *)url
 {
-    UIImagePickerController* picker = [[UIImagePickerController alloc]init];
+    
+}
+
+- (IBAction)onSelectFromLibaryPressed:(id)sender
+{
+    
+    [self showDocumentPickerInMode:UIDocumentPickerModeOpen];
+    
+//    UIDocumentPickerViewController* picker = [[UIDocumentPickerViewController alloc] init];
+//    picker.delegate = self;
+//    picker.modalPresentationStyle = YES;
+//    [self presentViewController:picker animated:YES completion:nil];
+//    UIImagePickerController* picker = [[UIImagePickerController alloc]init];
+//    picker.delegate = self;
+//    picker.allowsEditing = YES;
+//    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+//    
+//    [self presentViewController:picker animated:YES completion:NULL];
+    
+    
+}
+
+- (void)showDocumentPickerInMode:(UIDocumentPickerMode)mode {
+    UIDocumentPickerViewController *picker = [[UIDocumentPickerViewController alloc] initWithDocumentTypes:@[@"public.text"] inMode:mode];
+    
     picker.delegate = self;
-    picker.allowsEditing = YES;
-    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
     
-    [self presentViewController:picker animated:YES completion:NULL];
-    
-    
+    [self presentViewController:picker animated:YES completion:nil];
 }
 
 
@@ -40,6 +61,7 @@
     picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     
     [self presentViewController:picker animated:YES completion:NULL];
+    
 }
 
 @end

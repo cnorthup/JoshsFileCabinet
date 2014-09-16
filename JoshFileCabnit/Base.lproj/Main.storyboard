@@ -107,7 +107,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JHh-DE-80e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1340" y="128"/>
+            <point key="canvasLocation" x="290" y="990"/>
         </scene>
         <!--Folder View Controller - Document-->
         <scene sceneID="G84-mN-Z9J">
@@ -211,9 +211,9 @@
                             <rect key="frame" x="8" y="7.5" width="261" height="29"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
-                                <segment title="View"/>
-                                <segment title="Edit"/>
                                 <segment title="Read"/>
+                                <segment title="Edit"/>
+                                <segment title="View"/>
                             </segments>
                             <connections>
                                 <action selector="pressedSegementedController:" destination="icn-hk-4Jc" eventType="valueChanged" id="cMB-fV-33Q"/>
@@ -250,19 +250,25 @@
                                 <state key="normal" title="Choose from Camura">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="onSelectPhotoButtonPressed:" destination="pXL-dn-6oB" eventType="touchUpInside" id="OTv-Ty-7ZJ"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d1e-uX-t1O">
                                 <rect key="frame" x="91" y="138" width="139" height="30"/>
                                 <state key="normal" title="Choose From Libary">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="onSelectFromLibaryPressed:" destination="pXL-dn-6oB" eventType="touchUpInside" id="iAV-5F-q7k"/>
+                                </connections>
                             </button>
                         </subviews>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OgJ-xD-seC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="844" y="942"/>
+            <point key="canvasLocation" x="-102" y="990"/>
         </scene>
         <!--Check List View Controller-->
         <scene sceneID="qKE-5O-VFx">
@@ -331,7 +337,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sh6-dP-bdl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2143" y="714"/>
+            <point key="canvasLocation" x="681" y="990"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gdl-hb-Af3">

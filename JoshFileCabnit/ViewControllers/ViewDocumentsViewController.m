@@ -13,6 +13,7 @@
 @interface ViewDocumentsViewController () <UIWebViewDelegate, UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UIWebView *myWebView;
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
+@property NSArray* testFolders;
 
 
 @end
@@ -24,8 +25,10 @@
     [super viewDidLoad];
     NSString *path = [[NSBundle mainBundle] pathForResource:@"TestPDF" ofType:@"pdf"];
     NSURL *targetURL = [NSURL fileURLWithPath:path];
-    NSURLRequest *request = [NSURLRequest requestWithURL:targetURL];
-    [self.myWebView loadRequest:request];
+    NSDictionary* fileOne = @{@"title": @"Tax form 10B", @"memo": @"dsjkigurehpdsjovtviuyobinjvuboijnlk", @"file": targetURL};
+    NSArray* file1 = @[fileOne];
+    NSDictionary* folder1 = @{@"title": @"Tax Return", @"files": file1};
+    self.testFolders = @[folder1];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -37,7 +40,8 @@
 {
     UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"ViewDocumentsCellID"];
     if (indexPath.row == 0) {
-    cell.textLabel.text = @"Tax Return";
+        //cell.
+        cell;
     }
     else if(indexPath.row == 1)
     {
@@ -61,24 +65,6 @@
 
 
 
-//- (void)webViewDidFinishLoad:(UIWebView *)webView
-//{
-//    if (self.myWebView.canGoBack == YES) {
-//        self.isBackButtonAbleToWork.enabled = YES;
-//
-//    } else if (self.myWebView.canGoBack == NO){
-//        self.isBackButtonAbleToWork.enabled = NO;
-//    }
-//    
-//    if (self.myWebView.canGoForward == YES) {
-//        self.isForwardButtonAbleToWork.enabled = YES;
-//        
-//    } else if (self.myWebView.canGoForward == NO){
-//        self.isForwardButtonAbleToWork.enabled = NO;
-//    }
-//    self.isStopButtonAbleToWork.enabled = NO;
-//    self.isReloadButtonAbleToWork.enabled = YES;
-//}
 
 
 

@@ -21,6 +21,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *helpFAQButton;
 @property (weak, nonatomic) IBOutlet UIButton *legendButton;
 @property (weak, nonatomic) IBOutlet UIButton *privacyButton;
+@property NSURL* myLoginUrl;
+@property NSURL* myDocumentsUrl;
+@property NSUserDefaults* userDefaults;
+
 
 
 @end
@@ -36,7 +40,44 @@
     self.uploadViewController = [storyboard instantiateViewControllerWithIdentifier:@"UploadViewController"];
     self.checkListViewController = [storyboard instantiateViewControllerWithIdentifier:@"CheckListViewController"];
     
+    
+    NSString* tempEmail = @"cpa@example.com";
+    
+    self.userDefaults = [NSUserDefaults standardUserDefaults];
+    [self.userDefaults setObject:tempEmail forKey:@"email"];
 
+
+    //self.myDocumentsUrl = [NSURL URLWithString:@"http://taxzoc.herokuapp.com/api/folders?email=cpa@example.com"];
+    
+    [self login:[self.userDefaults objectForKey:@"email"] password:@"password"];
+    
+    //NSURLConnection* connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
+    
+
+    
+
+}
+
+-(void)login:(NSString*)email password:(NSString*)password
+{
+    self.myLoginUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://taxzoc.herokuapp.com/api/authentication_tokens?email=%@&password=%@", email, password]];
+    
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:self.myLoginUrl cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
+    [request setHTTPMethod:@"POST"];
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        NSError* error = [NSError new];
+        NSDictionary* myData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
+        NSLog(@"%@", [[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error] class]);
+        NSLog(@"%@", data.class);
+        NSLog(@"%@", response.class);
+        NSLog(@"%@", myData);
+        self.userDefaults = [NSUserDefaults standardUserDefaults];
+        [self.userDefaults setObject:myData[@"auth_token"] forKey:@"authorizationToken"];
+        [self getDocuments:email];
+    }];
+    
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -84,6 +125,20 @@
     NSLog(@"container %f", self.containterView.frame.size.height);
     UIView* view = self.containterView.subviews.firstObject;
     NSLog(@"subview %f", view.frame.size.height);
+}
+
+-(void)getDocuments:(NSString*)email
+{
+    self.myDocumentsUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://taxzoc.herokuapp.com/api/folders?email=%@",email]];
+
+    NSMutableURLRequest* request = [[NSMutableURLRequest alloc]initWithURL:self.myDocumentsUrl];
+    
+    [request addValue:[NSString stringWithFormat:@"Token token=%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"authorizationToken"]] forHTTPHeaderField:@"Authorization"];
+    //[request setHTTPMethod:@"POST"];
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        NSArray* myData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&connectionError];
+        [self.userDefaults setObject:myData forKey:@"documents"];
+    }];
 }
 
 -(void)showViewDocumentsVC
