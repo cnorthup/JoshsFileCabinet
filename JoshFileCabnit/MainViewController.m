@@ -151,7 +151,7 @@
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         NSArray* myData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&connectionError];
         [Defaults setUserDefault:myData forkey:@"documents"];
-        NSDictionary* firstFolder = [myData.firstObject[@"children"] objectAtIndex:0];
+        NSDictionary* firstFolder = [myData.firstObject[@"children"] objectAtIndex:1];
         NSArray* first = myData.firstObject[@"children"];
         NSLog(@"the child is %@", firstFolder[@"children"]);
         NSLog(@"%@", first);
