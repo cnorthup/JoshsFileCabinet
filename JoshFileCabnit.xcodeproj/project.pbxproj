@@ -21,6 +21,7 @@
 		56438AF419ACFED300E8BF39 /* FolderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 56438AF319ACFED300E8BF39 /* FolderViewController.m */; };
 		56438AF819AD04FC00E8BF39 /* FileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 56438AF719AD04FC00E8BF39 /* FileViewController.m */; };
 		5652B07D19B10D4D00AF9FCB /* Documents.m in Sources */ = {isa = PBXBuildFile; fileRef = 5652B07C19B10D4D00AF9FCB /* Documents.m */; };
+		56D4FC0E19C8B09500BF8323 /* Defaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 56D4FC0D19C8B09500BF8323 /* Defaults.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,8 @@
 		56438AF719AD04FC00E8BF39 /* FileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileViewController.m; sourceTree = "<group>"; };
 		5652B07B19B10D3E00AF9FCB /* Documents.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Documents.h; sourceTree = "<group>"; };
 		5652B07C19B10D4D00AF9FCB /* Documents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Documents.m; sourceTree = "<group>"; };
+		56D4FC0D19C8B09500BF8323 /* Defaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Defaults.m; sourceTree = "<group>"; };
+		56D4FC0F19C8B0A500BF8323 /* Defaults.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Defaults.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +112,8 @@
 				561A7F1719AB8D4400A7006C /* Images.xcassets */,
 				5652B07B19B10D3E00AF9FCB /* Documents.h */,
 				5652B07C19B10D4D00AF9FCB /* Documents.m */,
+				56D4FC0F19C8B0A500BF8323 /* Defaults.h */,
+				56D4FC0D19C8B09500BF8323 /* Defaults.m */,
 				561A7F2D19AB8DC700A7006C /* ViewControllers */,
 				5623891F19AFBDDA008D9652 /* TableViewCells */,
 				561A7F0A19AB8D4400A7006C /* Supporting Files */,
@@ -273,6 +278,7 @@
 				5623892119AFBE0B008D9652 /* CheckListPrototypeCell.m in Sources */,
 				561A7F3319AB979B00A7006C /* ViewDocumentsViewController.m in Sources */,
 				56438AF419ACFED300E8BF39 /* FolderViewController.m in Sources */,
+				56D4FC0E19C8B09500BF8323 /* Defaults.m in Sources */,
 				561A7F1319AB8D4400A7006C /* MainViewController.m in Sources */,
 				561A7F3019AB973900A7006C /* UploadViewController.m in Sources */,
 				561A7F1019AB8D4400A7006C /* AppDelegate.m in Sources */,

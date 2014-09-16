@@ -10,8 +10,10 @@
 #import "CheckListViewController.h"
 #import "ViewDocumentsViewController.h"
 #import "UploadViewController.h"
+#import "Defaults.h"
 
 @interface MainViewController ()
+
 
 @property (weak, nonatomic) IBOutlet UIView *containterView;
 @property CheckListViewController* checkListViewController;
@@ -43,13 +45,12 @@
     
     NSString* tempEmail = @"cpa@example.com";
     
-    self.userDefaults = [NSUserDefaults standardUserDefaults];
-    [self.userDefaults setObject:tempEmail forKey:@"email"];
+    [Defaults setUserDefault:tempEmail forkey:@"email"];
 
 
     //self.myDocumentsUrl = [NSURL URLWithString:@"http://taxzoc.herokuapp.com/api/folders?email=cpa@example.com"];
     
-    [self login:[self.userDefaults objectForKey:@"email"] password:@"password"];
+    [self login:[Defaults getUserDefaultForKey:@"email"] password:@"password"];
     
     //NSURLConnection* connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
     
@@ -72,9 +73,12 @@
         NSLog(@"%@", data.class);
         NSLog(@"%@", response.class);
         NSLog(@"%@", myData);
-        self.userDefaults = [NSUserDefaults standardUserDefaults];
-        [self.userDefaults setObject:myData[@"auth_token"] forKey:@"authorizationToken"];
-        [self getDocuments:email];
+        
+        [Defaults setUserDefaults:@[myData[@"auth_token"], [NSDate new]] forKeys:@[@"authorizationToken", @"lastTokenReceived"]];
+        
+//        [Defaults setUserDefault:myData[@"auth_token"] forkey:@"authorizationToken"];
+//        [Defaults setUserDefault:[NSDate new] forkey:@"lastTokenReceived"];
+        [MainViewController getDocuments:email];
     }];
     
     
@@ -127,17 +131,32 @@
     NSLog(@"subview %f", view.frame.size.height);
 }
 
--(void)getDocuments:(NSString*)email
-{
-    self.myDocumentsUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://taxzoc.herokuapp.com/api/folders?email=%@",email]];
 
-    NSMutableURLRequest* request = [[NSMutableURLRequest alloc]initWithURL:self.myDocumentsUrl];
+/**Documents are arranged as such
+ 
+ *Array
+    *Dictionary
+        *Array
+            *Dictionary
+ 
+**/
++(void)getDocuments:(NSString*)email
+{
+    NSURL* myUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://taxzoc.herokuapp.com/api/folders?email=%@",email]];
+
+    NSMutableURLRequest* request = [[NSMutableURLRequest alloc]initWithURL:myUrl];
     
-    [request addValue:[NSString stringWithFormat:@"Token token=%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"authorizationToken"]] forHTTPHeaderField:@"Authorization"];
+    [request addValue:[NSString stringWithFormat:@"Token token=%@",[Defaults getUserDefaultForKey:@"authorizationToken"]] forHTTPHeaderField:@"Authorization"];
     //[request setHTTPMethod:@"POST"];
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         NSArray* myData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&connectionError];
-        [self.userDefaults setObject:myData forKey:@"documents"];
+        [Defaults setUserDefault:myData forkey:@"documents"];
+        NSDictionary* firstFolder = [myData.firstObject[@"children"] objectAtIndex:0];
+        NSArray* first = myData.firstObject[@"children"];
+        NSLog(@"the child is %@", firstFolder[@"children"]);
+        NSLog(@"%@", first);
+
+
     }];
 }
 
