@@ -8,7 +8,8 @@
 
 #import "ViewDocumentsViewController.h"
 #import "FolderViewController.h"
-
+#import "Defaults.h"
+#import "FolderTableViewCell.h"
 
 @interface ViewDocumentsViewController () <UIWebViewDelegate, UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UIWebView *myWebView;
@@ -33,27 +34,21 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    return [[Defaults getUserDefaultForKey:@"documents"] count];
+    //return 2;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"ViewDocumentsCellID"];
-    if (indexPath.row == 0) {
-        //cell.
-        cell;
-    }
-    else if(indexPath.row == 1)
-    {
-        cell.textLabel.text = @"Bank info";
-
-    }
-    else
-    {
-        cell.textLabel.text = @"Assests";
-
-    }
+    FolderTableViewCell* cell = (FolderTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"ViewDocumentsCellID"];
+    NSDictionary* folder = [Defaults findPlaceInFolders];
+    cell.textLabel.text = folder[@"subfolders"][indexPath.row][@"name"];
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(UITableViewCell*)sender

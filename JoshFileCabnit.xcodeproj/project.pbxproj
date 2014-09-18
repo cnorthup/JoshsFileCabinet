@@ -22,6 +22,7 @@
 		56438AF819AD04FC00E8BF39 /* FileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 56438AF719AD04FC00E8BF39 /* FileViewController.m */; };
 		5652B07D19B10D4D00AF9FCB /* Documents.m in Sources */ = {isa = PBXBuildFile; fileRef = 5652B07C19B10D4D00AF9FCB /* Documents.m */; };
 		56D4FC0E19C8B09500BF8323 /* Defaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 56D4FC0D19C8B09500BF8323 /* Defaults.m */; };
+		56E0160119CA42D3006588AC /* FolderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 56E0160019CA42D3006588AC /* FolderTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,8 @@
 		5652B07C19B10D4D00AF9FCB /* Documents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Documents.m; sourceTree = "<group>"; };
 		56D4FC0D19C8B09500BF8323 /* Defaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Defaults.m; sourceTree = "<group>"; };
 		56D4FC0F19C8B0A500BF8323 /* Defaults.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Defaults.h; sourceTree = "<group>"; };
+		56E015FF19CA4290006588AC /* FolderTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FolderTableViewCell.h; sourceTree = "<group>"; };
+		56E0160019CA42D3006588AC /* FolderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +117,7 @@
 				5652B07C19B10D4D00AF9FCB /* Documents.m */,
 				56D4FC0F19C8B0A500BF8323 /* Defaults.h */,
 				56D4FC0D19C8B09500BF8323 /* Defaults.m */,
+				56E015FE19CA426E006588AC /* Cells */,
 				561A7F2D19AB8DC700A7006C /* ViewControllers */,
 				5623891F19AFBDDA008D9652 /* TableViewCells */,
 				561A7F0A19AB8D4400A7006C /* Supporting Files */,
@@ -173,6 +177,15 @@
 				5623892019AFBE0B008D9652 /* CheckListPrototypeCell.m */,
 			);
 			name = TableViewCells;
+			sourceTree = "<group>";
+		};
+		56E015FE19CA426E006588AC /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				56E015FF19CA4290006588AC /* FolderTableViewCell.h */,
+				56E0160019CA42D3006588AC /* FolderTableViewCell.m */,
+			);
+			name = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -282,6 +295,7 @@
 				561A7F1319AB8D4400A7006C /* MainViewController.m in Sources */,
 				561A7F3019AB973900A7006C /* UploadViewController.m in Sources */,
 				561A7F1019AB8D4400A7006C /* AppDelegate.m in Sources */,
+				56E0160119CA42D3006588AC /* FolderTableViewCell.m in Sources */,
 				561A7F0D19AB8D4400A7006C /* main.m in Sources */,
 				56438AF819AD04FC00E8BF39 /* FileViewController.m in Sources */,
 				5652B07D19B10D4D00AF9FCB /* Documents.m in Sources */,

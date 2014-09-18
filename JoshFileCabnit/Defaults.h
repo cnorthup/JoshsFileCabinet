@@ -14,11 +14,9 @@
 
 //set one userdefault
 +(void)setUserDefault:(id)object forkey:(NSString*)key;
-
 //allows for mutiple user default objects to set to their keys at once
 +(void)setUserDefaults:(NSArray*)objects forKeys:(NSArray *)keys;
-
 +(id)getUserDefaultForKey:(NSString*)key;
-
++(NSDictionary*)findPlaceInFolders;
 
 @end

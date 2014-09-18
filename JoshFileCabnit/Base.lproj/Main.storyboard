@@ -80,16 +80,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ViewDocumentsCellID" id="O5h-Fu-c45">
+                                    <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ViewDocumentsCellID" id="O5h-Fu-c45" customClass="FolderTableViewCell">
                                         <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="O5h-Fu-c45" id="BWk-xh-cnT">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="Gv0-NJ-Jcn" kind="push" id="vyT-8N-Fcg"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -103,11 +100,12 @@
                     <navigationItem key="navigationItem" title="My Folders" id="ED8-PH-O9q"/>
                     <connections>
                         <outlet property="myTableView" destination="3cJ-fO-lSx" id="2pi-0M-Koc"/>
+                        <segue destination="icn-hk-4Jc" kind="push" identifier="fileSegueID" id="LLS-Hm-LBl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JHh-DE-80e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="290" y="990"/>
+            <point key="canvasLocation" x="1566" y="128"/>
         </scene>
         <!--Folder View Controller - Document-->
         <scene sceneID="G84-mN-Z9J">
@@ -131,9 +129,6 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FHG-dI-AMr" id="OOq-oc-SFG">
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="icn-hk-4Jc" kind="push" id="cNc-c0-OjS"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -148,7 +143,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eeO-QT-3DZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1741" y="128"/>
+            <point key="canvasLocation" x="1337" y="-514"/>
         </scene>
         <!--File View Controller-->
         <scene sceneID="go1-tY-u6v">

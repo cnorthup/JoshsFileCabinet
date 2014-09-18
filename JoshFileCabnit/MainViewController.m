@@ -134,11 +134,14 @@
 
 /**Documents are arranged as such
  
- *Array
-    *Dictionary
-        *Array
-            *Dictionary
+ *Array of folders
+    *Dictionary   Folder Structure                           File Structure
+                 id : 1                                          id : 1
+               name : folder 1                                 name : file 1
+         subfolders : [subfolder1, subfolder2]                 file : url to file
+          documents : [file1, file2]
  
+    *Dictionary Folder 2
 **/
 +(void)getDocuments:(NSString*)email
 {
@@ -151,12 +154,8 @@
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         NSArray* myData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&connectionError];
         [Defaults setUserDefault:myData forkey:@"documents"];
-        NSDictionary* firstFolder = [myData.firstObject[@"children"] objectAtIndex:1];
-        NSArray* first = myData.firstObject[@"children"];
-        NSLog(@"the child is %@", firstFolder[@"children"]);
-        NSLog(@"%@", first);
-
-
+        NSLog(@"the response it type %@", [[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&connectionError] class]);
+        NSLog(@"%@", [myData.firstObject class]);
     }];
 }
 
