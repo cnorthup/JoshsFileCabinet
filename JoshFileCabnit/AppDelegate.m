@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Contract. All rights reserved.
 //
 
+#import "Defaults.h"
 #import "AppDelegate.h"
 
 @interface AppDelegate ()
@@ -17,7 +18,10 @@
             
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+
+    [Defaults setUserDefaults:@[@true, [NSMutableArray new], [NSNumber numberWithInt:0]] forKeys:@[@"atTopLevel", @"placeInFolders", @"depthLevel"]];
+    NSLog(@"depth leve is %@",[Defaults getUserDefaultForKey:@"depthLevel"]);
+
     return YES;
 }
 

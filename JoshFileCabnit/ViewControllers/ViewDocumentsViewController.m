@@ -34,7 +34,16 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[Defaults getUserDefaultForKey:@"documents"] count];
+    if ([[Defaults getUserDefaultForKey:@"atTopLevel"] boolValue])
+    {
+        return [[Defaults getUserDefaultForKey:@"documents"] count];
+    }
+    else
+    {
+        [Defaults findPlaceInFolders];
+        return [[[Defaults getUserDefaultForKey:@"currentFolder"]objectForKey:@"subfolders"] count];
+        
+    }
     //return 2;
 }
 
@@ -42,20 +51,41 @@
 {
     FolderTableViewCell* cell = (FolderTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"ViewDocumentsCellID"];
     if ([[Defaults getUserDefaultForKey:@"atTopLevel"] boolValue])
-    {
+        {
         NSArray* folder = [Defaults findPlaceInFolders];
         cell.textLabel.text = folder[indexPath.row][@"name"];
+        cell.folderID = folder[indexPath.row][@"id"];
+        
 
     }
-    else{
+    else
+    {
         NSDictionary* folder = [Defaults findPlaceInFolders];
         cell.textLabel.text = folder[@"subfolders"][indexPath.row][@"name"];
+        cell.folderID = folder[@"subfolders"][indexPath.row][@"id"];
+        //NSLog(@"%@", folder[@"subfolders"]);
+        if ([folder[@"subfolders"] count] == 0)
+        {
+            NSLog(@"no more subFolders");
+        }
     }
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    FolderTableViewCell* cell = (FolderTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
+    NSMutableArray* place = (NSMutableArray*)[Defaults getUserDefaultForKey:@"placeInFolders"];
+    [place addObject:cell.folderID];
+
+    [Defaults setUserDefaults:@[@false,
+                                 place]
+                      forKeys:@[@"atTopLevel",
+                                @"placeInFolders"]];
+    
+    NSLog(@"%@", place);
+    [Defaults findPlaceInFolders];
+    [self.myTableView reloadData];
     
 }
 

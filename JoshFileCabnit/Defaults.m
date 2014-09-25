@@ -58,34 +58,48 @@
 
 +(id)findPlaceInFolders
 {
-    [Defaults setUserDefaults:@[@0, [Defaults getUserDefaultForKey:@"documents"], @false] forKeys:@[@"depthLevel", @"searchFolder", @"foundPlace"]];
-    NSLog(@"%@", [Defaults getUserDefaultForKey:@"placeInFolders"]);
+    [Defaults setUserDefaults:@[[NSNumber numberWithInt:0] , [Defaults getUserDefaultForKey:@"documents"], @false] forKeys:@[@"depthLevel", @"searchFolder", @"foundPlace"]];
+    
+    int z = 0;
+
     while (![[Defaults getUserDefaultForKey:@"foundPlace"] boolValue])
     {
         for (NSDictionary*folder in [Defaults getUserDefaultForKey:@"searchFolder"])
             {
-                NSLog(@"%@, %@", [folder[@"id"] description], [[Defaults getUserDefaultForKey:@"placeInFolders"]objectAtIndex:(int)[Defaults getUserDefaultForKey:@"depthLevel"]][@"id"]);
+                //NSLog(@"%@, %@", [folder[@"id"] description], [[Defaults getUserDefaultForKey:@"placeInFolders"]objectAtIndex:(int)[Defaults getUserDefaultForKey:@"depthLevel"]][@"id"]);
                 
-                if (([Defaults getUserDefaultForKey:@"placeInFolders"] == nil)||([[Defaults getUserDefaultForKey:@"placeInfolders"] count] == 0))
+                if (([Defaults getUserDefaultForKey:@"placeInFolders"] == nil)||([[Defaults getUserDefaultForKey:@"placeInFolders"] count] == 0))
                 {
                     [Defaults setUserDefaults:@[[Defaults getUserDefaultForKey:@"documents"], @true, @true] forKeys:@[@"currentFolder", @"foundPlace", @"atTopLevel"]];
                     break;
                 }
                 
                 else{
-                    if (([[folder[@"id"] description] isEqualToString:[[Defaults getUserDefaultForKey:@"placeInFolders"]objectAtIndex:(int)[Defaults getUserDefaultForKey:@"depthLevel"]][@"id"]])&&((int)[Defaults getUserDefaultForKey:@"depthLevel"] != ([[Defaults getUserDefaultForKey:@"placeInFolder"] count] - 1)))
+                    
+                    if (z < [[Defaults getUserDefaultForKey:@"placeInFolders"] count])
                     {
-                        NSNumber *x = @((int)[Defaults getUserDefaultForKey:@"depthLevel"] + 1);
-                        [Defaults setUserDefaults:@[x, folder[@"subfolder"]] forKeys:@[@"depthLevel", @"searchFolder"]];
-                        break;
-                    }
-                    else if(([[folder[@"id"] description] isEqualToString:[[Defaults getUserDefaultForKey:@"placeInFolders"]objectAtIndex:(int)[Defaults getUserDefaultForKey:@"depthLevel"]][@"id"]])&&((int)[Defaults getUserDefaultForKey:@"depthLevel"] == ([[Defaults getUserDefaultForKey:@"placeInFolder"] count] - 1)))
-                    {
-                        [Defaults setUserDefaults:@[@true, folder] forKeys:@[@"foundPlace", @"currentFolder"]];
-                        break;
+                        if ([[[[Defaults getUserDefaultForKey:@"placeInFolders"] objectAtIndex:z] description] isEqualToString:[[[Defaults getUserDefaultForKey:@"placeInFolders"] lastObject] description]])
+                        {
+                            if ([[folder[@"id"] description] isEqualToString:[[[Defaults getUserDefaultForKey:@"placeInFolders"]objectAtIndex:z] description]])
+                            {
+                                [Defaults setUserDefaults:@[@true, folder] forKeys:@[@"foundPlace", @"currentFolder"]];
+                                break;
+                            }
+                            
+                            
+                        }
+                        else
+                        {
+                            if ([[folder[@"id"] description] isEqualToString:[[[Defaults getUserDefaultForKey:@"placeInFolders"]objectAtIndex:z] description]])
+                            {
+                                z++;
+                                NSNumber *x = @((int)[Defaults getUserDefaultForKey:@"depthLevel"] + 1);
+                                [Defaults setUserDefaults:@[x, folder[@"subfolders"]] forKeys:@[@"depthLevel", @"searchFolder"]];
+                                break;
+                            }
+                        }
                     }
                 }
-        
             }
     }
     return [Defaults getUserDefaultForKey:@"currentFolder"];
