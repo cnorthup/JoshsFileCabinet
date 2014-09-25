@@ -56,24 +56,34 @@
     return [userDefaults objectForKey:key];
 }
 
-+(NSDictionary*)findPlaceInFolders
++(id)findPlaceInFolders
 {
     [Defaults setUserDefaults:@[@0, [Defaults getUserDefaultForKey:@"documents"], @false] forKeys:@[@"depthLevel", @"searchFolder", @"foundPlace"]];
-    
-    while ([Defaults getUserDefaultForKey:@"foundPlace"] == false)
+    NSLog(@"%@", [Defaults getUserDefaultForKey:@"placeInFolders"]);
+    while (![[Defaults getUserDefaultForKey:@"foundPlace"] boolValue])
     {
         for (NSDictionary*folder in [Defaults getUserDefaultForKey:@"searchFolder"])
             {
-                if (([folder[@"id"] isEqualToString:[[Defaults getUserDefaultForKey:@"placeInFolders"]objectAtIndex:(int)[Defaults getUserDefaultForKey:@"depthLevel"]][@"id"]])&&((int)[Defaults getUserDefaultForKey:@"depthLevel"] != ([[Defaults getUserDefaultForKey:@"placeInFolder"] count] - 1)))
+                NSLog(@"%@, %@", [folder[@"id"] description], [[Defaults getUserDefaultForKey:@"placeInFolders"]objectAtIndex:(int)[Defaults getUserDefaultForKey:@"depthLevel"]][@"id"]);
+                
+                if (([Defaults getUserDefaultForKey:@"placeInFolders"] == nil)||([[Defaults getUserDefaultForKey:@"placeInfolders"] count] == 0))
                 {
-                    NSNumber *x = @((int)[Defaults getUserDefaultForKey:@"depthLevel"] + 1);
-                    [Defaults setUserDefaults:@[x, folder[@"subfolder"]] forKeys:@[@"depthLevel", @"searchFolder"]];
+                    [Defaults setUserDefaults:@[[Defaults getUserDefaultForKey:@"documents"], @true, @true] forKeys:@[@"currentFolder", @"foundPlace", @"atTopLevel"]];
                     break;
                 }
-                else if(([folder[@"id"] isEqualToString:[[Defaults getUserDefaultForKey:@"placeInFolders"]objectAtIndex:(int)[Defaults getUserDefaultForKey:@"depthLevel"]][@"id"]])&&((int)[Defaults getUserDefaultForKey:@"depthLevel"] == ([[Defaults getUserDefaultForKey:@"placeInFolder"] count] - 1)))
-                {
-                    [Defaults setUserDefaults:@[@true, folder] forKeys:@[@"foundPlace", @"currentFolder"]];
-                    break;
+                
+                else{
+                    if (([[folder[@"id"] description] isEqualToString:[[Defaults getUserDefaultForKey:@"placeInFolders"]objectAtIndex:(int)[Defaults getUserDefaultForKey:@"depthLevel"]][@"id"]])&&((int)[Defaults getUserDefaultForKey:@"depthLevel"] != ([[Defaults getUserDefaultForKey:@"placeInFolder"] count] - 1)))
+                    {
+                        NSNumber *x = @((int)[Defaults getUserDefaultForKey:@"depthLevel"] + 1);
+                        [Defaults setUserDefaults:@[x, folder[@"subfolder"]] forKeys:@[@"depthLevel", @"searchFolder"]];
+                        break;
+                    }
+                    else if(([[folder[@"id"] description] isEqualToString:[[Defaults getUserDefaultForKey:@"placeInFolders"]objectAtIndex:(int)[Defaults getUserDefaultForKey:@"depthLevel"]][@"id"]])&&((int)[Defaults getUserDefaultForKey:@"depthLevel"] == ([[Defaults getUserDefaultForKey:@"placeInFolder"] count] - 1)))
+                    {
+                        [Defaults setUserDefaults:@[@true, folder] forKeys:@[@"foundPlace", @"currentFolder"]];
+                        break;
+                    }
                 }
         
             }

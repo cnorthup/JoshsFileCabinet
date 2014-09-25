@@ -41,8 +41,16 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     FolderTableViewCell* cell = (FolderTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"ViewDocumentsCellID"];
-    NSDictionary* folder = [Defaults findPlaceInFolders];
-    cell.textLabel.text = folder[@"subfolders"][indexPath.row][@"name"];
+    if ([[Defaults getUserDefaultForKey:@"atTopLevel"] boolValue])
+    {
+        NSArray* folder = [Defaults findPlaceInFolders];
+        cell.textLabel.text = folder[indexPath.row][@"name"];
+
+    }
+    else{
+        NSDictionary* folder = [Defaults findPlaceInFolders];
+        cell.textLabel.text = folder[@"subfolders"][indexPath.row][@"name"];
+    }
     return cell;
 }
 
