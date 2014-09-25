@@ -97,8 +97,15 @@
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="My Folders" id="ED8-PH-O9q"/>
+                    <navigationItem key="navigationItem" title="My Folders" id="ED8-PH-O9q">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="vJO-Uo-hiP">
+                            <connections>
+                                <action selector="didPressBackButton:" destination="ec6-z5-9oh" id="Kaj-G9-aar"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="myBackButton" destination="vJO-Uo-hiP" id="JZS-oa-uZo"/>
                         <outlet property="myTableView" destination="3cJ-fO-lSx" id="2pi-0M-Koc"/>
                         <segue destination="icn-hk-4Jc" kind="push" identifier="fileSegueID" id="LLS-Hm-LBl"/>
                     </connections>

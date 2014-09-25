@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 @property NSArray* testFolders;
 
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *myBackButton;
 
 @end
 
@@ -36,11 +37,12 @@
 {
     if ([[Defaults getUserDefaultForKey:@"atTopLevel"] boolValue])
     {
+        self.myBackButton.enabled = NO;
         return [[Defaults getUserDefaultForKey:@"documents"] count];
     }
     else
     {
-        [Defaults findPlaceInFolders];
+        self.myBackButton.enabled = YES;
         return [[[Defaults getUserDefaultForKey:@"currentFolder"]objectForKey:@"subfolders"] count];
         
     }
@@ -60,7 +62,7 @@
     }
     else
     {
-        NSDictionary* folder = [Defaults findPlaceInFolders];
+        NSDictionary* folder = [Defaults getUserDefaultForKey:@"currentFolder"];
         cell.textLabel.text = folder[@"subfolders"][indexPath.row][@"name"];
         cell.folderID = folder[@"subfolders"][indexPath.row][@"id"];
         //NSLog(@"%@", folder[@"subfolders"]);
@@ -83,10 +85,31 @@
                       forKeys:@[@"atTopLevel",
                                 @"placeInFolders"]];
     
-    NSLog(@"%@", place);
     [Defaults findPlaceInFolders];
     [self.myTableView reloadData];
     
+}
+- (IBAction)didPressBackButton:(id)sender
+{
+    self.myBackButton.enabled = NO;
+    NSMutableArray* place = (NSMutableArray*)[Defaults getUserDefaultForKey:@"placeInFolders"];
+    [place removeLastObject];
+    if (place.count == 0)
+    {
+        [Defaults setUserDefaults:@[@true,
+                                     place]
+                          forKeys:@[@"atTopLevel",
+                                    @"placeInFolders"]];
+    }
+    else
+    {
+        [Defaults setUserDefaults:@[@false,
+                                     place]
+                          forKeys:@[@"atTopLevel",
+                                    @"placeInFolders"]];
+    }
+    [Defaults findPlaceInFolders];
+    [self.myTableView reloadData];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(UITableViewCell*)sender
