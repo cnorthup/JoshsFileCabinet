@@ -10,10 +10,12 @@
 #import "FolderViewController.h"
 #import "Defaults.h"
 #import "FolderTableViewCell.h"
+#import "FileObject.h"
+#import "FileViewController.h"
 
 
 
-@interface ViewDocumentsViewController () <UIWebViewDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface ViewDocumentsViewController () <UIWebViewDelegate, UITableViewDelegate, UITableViewDataSource, FileObjectDelegate>
 @property (weak, nonatomic) IBOutlet UIWebView *myWebView;
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 @property NSArray* testFolders;
@@ -27,6 +29,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    FileObject* newFile = [FileObject new];
+    [newFile setDelegate:self];
     NSString *path = [[NSBundle mainBundle] pathForResource:@"TestPDF" ofType:@"pdf"];
     NSURL *targetURL = [NSURL fileURLWithPath:path];
     NSDictionary* fileOne = @{@"title": @"Tax form 10B", @"memo": @"dsjkigurehpdsjovtviuyobinjvuboijnlk", @"file": targetURL};
@@ -56,7 +60,6 @@
             }
             else
             {
-                NSLog(@"folder");
                 self.myBackButton.enabled = YES;
                 return [[[Defaults getUserDefaultForKey:@"currentFolder"]objectForKey:@"subfolders"] count];
                 
@@ -71,8 +74,6 @@
             }
             else
             {
-                NSLog(@"file");
-                NSLog(@"%@", [[Defaults getUserDefaultForKey:@"currentFolder"]objectForKey:@"documents"]);
                 self.myBackButton.enabled = YES;
                 return [[[Defaults getUserDefaultForKey:@"currentFolder"]objectForKey:@"documents"] count];
                 
@@ -112,7 +113,7 @@
                 
             case 1:
                 cell.textLabel.text = folder[@"documents"][indexPath.row][@"name"];
-                cell.cellFile = folder[@"documents"][indexPath.row];
+                cell.cellFile = [FileObject initWithFile:folder[@"documents"][indexPath.row]];
                 break;
                 
             default:
@@ -160,10 +161,24 @@
     else if(indexPath.section == 1)
     {
         FolderTableViewCell* cell = (FolderTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
+        [self performSegueWithIdentifier:@"fileSegueID" sender:cell];
+        
     }
 
     
 }
+
+-(void)dataFetchComplete:(FileObject *)sender
+{
+    NSLog(@"protocal worked");
+}
+
+-(void)dataFetchFailed
+{
+    NSLog(@"protocal worked");
+
+}
+
 - (IBAction)didPressBackButton:(id)sender
 {
     self.myBackButton.enabled = NO;
@@ -187,16 +202,11 @@
     [self.myTableView reloadData];
 }
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(UITableViewCell*)sender
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(FolderTableViewCell*)sender
 {
-    FolderViewController* folderVC = segue.destinationViewController;
-    folderVC.title = sender.textLabel.text;
+    FileViewController* fileVC = segue.destinationViewController;
+    fileVC.myFile = sender.cellFile;
     
 }
-
-
-
-
-
 
 @end

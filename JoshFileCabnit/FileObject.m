@@ -15,9 +15,16 @@
 @property NSDictionary* file;
 @property BOOL filledOut;
 
+
 @end
 
 @implementation FileObject
+@synthesize delegate;
+
+-(void) myMethodToDoStuff
+{
+    [self.delegate dataFetchComplete:self]; //this will call the method implemented in your other class
+}
 
 +(FileObject*)initWithFile:(NSDictionary*)file
 {
@@ -26,8 +33,10 @@
     myFile.fileID = file[@"id"];
     myFile.folderName = file[@"folder_name"];
     myFile.filledOut = NO;
+    [myFile myMethodToDoStuff];
     return myFile;
 }
+
 
 -(void)getFile:(FileObject*)file
 {
@@ -57,7 +66,12 @@
     {
         NSLog(@"No file");
     }
-
 }
 
+
+
 @end
+
+
+
+

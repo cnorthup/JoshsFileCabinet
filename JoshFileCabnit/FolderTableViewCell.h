@@ -8,12 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "FileObject.h"
 
 
 @interface FolderTableViewCell : UITableViewCell
 
 @property NSString* folderID;
-@property NSDictionary* cellFile;
+@property FileObject* cellFile;
 
 
 @end

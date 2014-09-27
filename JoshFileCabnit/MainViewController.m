@@ -75,9 +75,6 @@
         NSLog(@"%@", myData);
         
         [Defaults setUserDefaults:@[myData[@"auth_token"], [NSDate new]] forKeys:@[@"authorizationToken", @"lastTokenReceived"]];
-        
-//        [Defaults setUserDefault:myData[@"auth_token"] forkey:@"authorizationToken"];
-//        [Defaults setUserDefault:[NSDate new] forkey:@"lastTokenReceived"];
         [MainViewController getDocuments:email];
     }];
     

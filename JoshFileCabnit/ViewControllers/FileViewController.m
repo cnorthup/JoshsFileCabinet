@@ -29,7 +29,10 @@
     self.memoTextView.editable = NO;
     self.fileNameTextField.enabled = NO;
     self.folderNameTextField.enabled = NO;
+}
 
+-(void)viewWillAppear:(BOOL)animated
+{
 }
 
 -(void)viewDidAppear:(BOOL)animated

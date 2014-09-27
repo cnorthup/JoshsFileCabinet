@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FileObject.h"
 
 @interface FileViewController : UIViewController
+
+@property FileObject* myFile;
 
 @end
