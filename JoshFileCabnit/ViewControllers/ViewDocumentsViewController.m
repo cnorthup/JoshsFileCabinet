@@ -11,6 +11,8 @@
 #import "Defaults.h"
 #import "FolderTableViewCell.h"
 
+
+
 @interface ViewDocumentsViewController () <UIWebViewDelegate, UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UIWebView *myWebView;
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
@@ -33,20 +35,54 @@
     self.testFolders = @[folder1];
 }
 
+
+
+#pragma mark-- TableView
+
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 2;
+}
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if ([[Defaults getUserDefaultForKey:@"atTopLevel"] boolValue])
-    {
-        self.myBackButton.enabled = NO;
-        return [[Defaults getUserDefaultForKey:@"documents"] count];
-    }
-    else
-    {
-        self.myBackButton.enabled = YES;
-        return [[[Defaults getUserDefaultForKey:@"currentFolder"]objectForKey:@"subfolders"] count];
+    switch (section) {
+        case 0:
+            if ([[Defaults getUserDefaultForKey:@"atTopLevel"] boolValue])
+            {
+                self.myBackButton.enabled = NO;
+                return [[Defaults getUserDefaultForKey:@"documents"] count];
+            }
+            else
+            {
+                NSLog(@"folder");
+                self.myBackButton.enabled = YES;
+                return [[[Defaults getUserDefaultForKey:@"currentFolder"]objectForKey:@"subfolders"] count];
+                
+            }
+            break;
         
+        case 1:
+            if ([[Defaults getUserDefaultForKey:@"atTopLevel"] boolValue])
+            {
+                self.myBackButton.enabled = NO;
+                return 0;
+            }
+            else
+            {
+                NSLog(@"file");
+                NSLog(@"%@", [[Defaults getUserDefaultForKey:@"currentFolder"]objectForKey:@"documents"]);
+                self.myBackButton.enabled = YES;
+                return [[[Defaults getUserDefaultForKey:@"currentFolder"]objectForKey:@"documents"] count];
+                
+            }
+            break;
+            
+        default:
+            return 1;
+            break;
     }
-    //return 2;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -57,8 +93,6 @@
         NSArray* folder = [Defaults findPlaceInFolders];
         cell.textLabel.text = folder[indexPath.row][@"name"];
         cell.folderID = folder[indexPath.row][@"id"];
-        
-
     }
     else
     {
@@ -70,23 +104,64 @@
         {
             NSLog(@"no more subFolders");
         }
+        switch (indexPath.section) {
+            case 0:
+                cell.textLabel.text = folder[@"subfolders"][indexPath.row][@"name"];
+                cell.folderID = folder[@"subfolders"][indexPath.row][@"id"];
+                break;
+                
+            case 1:
+                cell.textLabel.text = folder[@"documents"][indexPath.row][@"name"];
+                cell.cellFile = folder[@"documents"][indexPath.row];
+                break;
+                
+            default:
+                NSLog(@"switch defaulted");
+                break;
+        }
     }
     return cell;
 }
 
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    switch (section) {
+        case 0:
+            return @"Folders";
+            break;
+            
+        case 1:
+            return @"Files";
+            break;
+            
+        default:
+            return @"No title";
+            break;
+    }
+}
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    FolderTableViewCell* cell = (FolderTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
-    NSMutableArray* place = (NSMutableArray*)[Defaults getUserDefaultForKey:@"placeInFolders"];
-    [place addObject:cell.folderID];
-
-    [Defaults setUserDefaults:@[@false,
-                                 place]
-                      forKeys:@[@"atTopLevel",
-                                @"placeInFolders"]];
+    if (indexPath.section == 0)
+    {
+        FolderTableViewCell* cell = (FolderTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
+        NSMutableArray* place = (NSMutableArray*)[Defaults getUserDefaultForKey:@"placeInFolders"];
+        [place addObject:cell.folderID];
+        
+        [Defaults setUserDefaults:@[@false,
+                                     place]
+                          forKeys:@[@"atTopLevel",
+                                    @"placeInFolders"]];
+        
+        [Defaults findPlaceInFolders];
+        [self.myTableView reloadData];
+    }
     
-    [Defaults findPlaceInFolders];
-    [self.myTableView reloadData];
+    else if(indexPath.section == 1)
+    {
+        FolderTableViewCell* cell = (FolderTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
+    }
+
     
 }
 - (IBAction)didPressBackButton:(id)sender

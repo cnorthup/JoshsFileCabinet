@@ -13,6 +13,7 @@
 @interface FolderTableViewCell : UITableViewCell
 
 @property NSString* folderID;
+@property NSDictionary* cellFile;
 
 
 @end

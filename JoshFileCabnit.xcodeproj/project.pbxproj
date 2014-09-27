@@ -21,6 +21,7 @@
 		56438AF419ACFED300E8BF39 /* FolderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 56438AF319ACFED300E8BF39 /* FolderViewController.m */; };
 		56438AF819AD04FC00E8BF39 /* FileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 56438AF719AD04FC00E8BF39 /* FileViewController.m */; };
 		5652B07D19B10D4D00AF9FCB /* Documents.m in Sources */ = {isa = PBXBuildFile; fileRef = 5652B07C19B10D4D00AF9FCB /* Documents.m */; };
+		566418B819D701F000735B38 /* FileObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 566418B719D701F000735B38 /* FileObject.m */; };
 		56D4FC0E19C8B09500BF8323 /* Defaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 56D4FC0D19C8B09500BF8323 /* Defaults.m */; };
 		56E0160119CA42D3006588AC /* FolderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 56E0160019CA42D3006588AC /* FolderTableViewCell.m */; };
 /* End PBXBuildFile section */
@@ -63,6 +64,8 @@
 		56438AF719AD04FC00E8BF39 /* FileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileViewController.m; sourceTree = "<group>"; };
 		5652B07B19B10D3E00AF9FCB /* Documents.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Documents.h; sourceTree = "<group>"; };
 		5652B07C19B10D4D00AF9FCB /* Documents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Documents.m; sourceTree = "<group>"; };
+		566418B719D701F000735B38 /* FileObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileObject.m; sourceTree = "<group>"; };
+		566418B919D701FD00735B38 /* FileObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileObject.h; sourceTree = "<group>"; };
 		56D4FC0D19C8B09500BF8323 /* Defaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Defaults.m; sourceTree = "<group>"; };
 		56D4FC0F19C8B0A500BF8323 /* Defaults.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Defaults.h; sourceTree = "<group>"; };
 		56E015FF19CA4290006588AC /* FolderTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FolderTableViewCell.h; sourceTree = "<group>"; };
@@ -118,6 +121,7 @@
 				56D4FC0F19C8B0A500BF8323 /* Defaults.h */,
 				56D4FC0D19C8B09500BF8323 /* Defaults.m */,
 				56E015FE19CA426E006588AC /* Cells */,
+				566418B619D701D900735B38 /* Objects */,
 				561A7F2D19AB8DC700A7006C /* ViewControllers */,
 				5623891F19AFBDDA008D9652 /* TableViewCells */,
 				561A7F0A19AB8D4400A7006C /* Supporting Files */,
@@ -177,6 +181,15 @@
 				5623892019AFBE0B008D9652 /* CheckListPrototypeCell.m */,
 			);
 			name = TableViewCells;
+			sourceTree = "<group>";
+		};
+		566418B619D701D900735B38 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				566418B919D701FD00735B38 /* FileObject.h */,
+				566418B719D701F000735B38 /* FileObject.m */,
+			);
+			name = Objects;
 			sourceTree = "<group>";
 		};
 		56E015FE19CA426E006588AC /* Cells */ = {
@@ -292,6 +305,7 @@
 				561A7F3319AB979B00A7006C /* ViewDocumentsViewController.m in Sources */,
 				56438AF419ACFED300E8BF39 /* FolderViewController.m in Sources */,
 				56D4FC0E19C8B09500BF8323 /* Defaults.m in Sources */,
+				566418B819D701F000735B38 /* FileObject.m in Sources */,
 				561A7F1319AB8D4400A7006C /* MainViewController.m in Sources */,
 				561A7F3019AB973900A7006C /* UploadViewController.m in Sources */,
 				561A7F1019AB8D4400A7006C /* AppDelegate.m in Sources */,
