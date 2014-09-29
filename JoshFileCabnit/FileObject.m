@@ -12,18 +12,19 @@
 @interface FileObject ()
 
 @property NSString* fileID;
-@property NSDictionary* file;
+@property NSDictionary* unparsedFile;
+@property NSString* fileMemo;
 @property BOOL filledOut;
 
 
 @end
 
 @implementation FileObject
-@synthesize delegate;
 
--(void) myMethodToDoStuff
+-(void) succeedInGettingData
 {
-    [self.delegate dataFetchComplete:self]; //this will call the method implemented in your other class
+    NSLog(@"protocal worked, got that data");
+    //[self.delegate dataFetchComplete:nil];
 }
 
 +(FileObject*)initWithFile:(NSDictionary*)file
@@ -33,8 +34,12 @@
     myFile.fileID = file[@"id"];
     myFile.folderName = file[@"folder_name"];
     myFile.filledOut = NO;
-    [myFile myMethodToDoStuff];
     return myFile;
+}
+
++(void)checkDelegate:(FileObject*)sender
+{
+    [sender succeedInGettingData];
 }
 
 
@@ -51,12 +56,15 @@
             if (data != nil)
             {
                 NSLog(@"data was recieved");
-                NSLog(@"%@", [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&connectionError]);
-                file.filledOut = YES;
-                file.file = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&connectionError];
+                //NSLog(@"%@", [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&connectionError]);
+                //file.filledOut = YES;
+                //file.file = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&connectionError];
+                NSDictionary* dictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&connectionError];
+                [self.delegate dataFetchComplete:dictionary];
             }
             else
             {
+                [self.delegate dataFetchFailed];
                 NSLog(@"No data");
             }
         }];
@@ -66,6 +74,16 @@
     {
         NSLog(@"No file");
     }
+}
+
++(FileObject*)parseFile:(FileObject*)file
+{
+    return file;
+}
+
++(NSString*)getMemo:(FileObject *)file
+{
+    return file.fileMemo;
 }
 
 

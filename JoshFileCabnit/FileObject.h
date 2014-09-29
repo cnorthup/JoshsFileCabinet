@@ -12,7 +12,9 @@
 
 @protocol FileObjectDelegate <NSObject>//define delegate protocal
 
--(void)dataFetchComplete:(FileObject*) sender;
+@required
+
+-(void)dataFetchComplete:(NSDictionary*)object;
 -(void)dataFetchFailed;
 
 @end
@@ -21,10 +23,14 @@
 
 @property NSString* fileName;
 @property NSString* folderName;
-@property NSString* fileMemo;
+@property NSString* fileType;
+@property float* fileSize;
+
 @property (nonatomic, weak) id <FileObjectDelegate> delegate;
 
 +(FileObject*)initWithFile:(NSDictionary*)file;
-
++(void)checkDelegate:(FileObject*)sender;
 -(void)getFile:(FileObject*)file;
++(NSString*)getMemo:(FileObject*)file;
+
 @end

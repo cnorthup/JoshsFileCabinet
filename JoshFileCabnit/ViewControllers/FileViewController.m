@@ -7,9 +7,12 @@
 //
 
 #import "FileViewController.h"
+#import "FileObject.h"
 
 
-@interface FileViewController () <UIWebViewDelegate, UIDocumentInteractionControllerDelegate, UITextFieldDelegate>
+@interface FileViewController () <UIWebViewDelegate, UIDocumentInteractionControllerDelegate, UITextFieldDelegate, FileObjectDelegate, UIAlertViewDelegate>
+
+
 @property (weak, nonatomic) IBOutlet UIWebView *myWebView;
 @property (weak, nonatomic) IBOutlet UITextField *folderNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *fileNameTextField;
@@ -29,6 +32,7 @@
     self.memoTextView.editable = NO;
     self.fileNameTextField.enabled = NO;
     self.folderNameTextField.enabled = NO;
+    self.myFile.delegate = self;
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -37,6 +41,8 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
+    [self.myFile getFile:self.myFile];
+
     CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
     NSLog(@"%f",screenRect.size.height);
     if (screenRect.size.height == 548)
@@ -49,12 +55,38 @@
         self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, 391);
         //self.memoTextView.frame = CGRectMake(self.memoTextView.frame.origin.x, self.memoTextView.frame.origin.y, self.memoTextView.frame.size.width, 257-69);
     }
+    [self.myFile getFile:self.myFile];
     NSLog(@"%f", self.memoTextView.frame.size.height);
 }
 
 - (UIViewController *)documentInteractionControllerViewControllerForPreview:(UIDocumentInteractionController *)controller
 {
     return self;
+}
+
+#pragma mark-- FileObject
+
+-(void)dataFetchComplete:(NSDictionary*)object
+{
+    NSLog(@"%@", object);
+}
+
+-(void)dataFetchFailed
+{
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"ConnectionFailed" message:@"We are sorry but we could not retrieve the file you are looking for" delegate:self cancelButtonTitle:@"Go back" otherButtonTitles:@"Retry", nil];
+    [alertView show];
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0)
+    {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+    else
+    {
+        [self.myFile getFile:self.myFile];
+    }
 }
 
 - (IBAction)pressedSegementedController:(UISegmentedControl*)sender

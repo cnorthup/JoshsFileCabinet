@@ -21,6 +21,7 @@
 @property NSArray* testFolders;
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *myBackButton;
+@property FileObject* myFileObject;
 
 @end
 
@@ -29,8 +30,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    FileObject* newFile = [FileObject new];
-    [newFile setDelegate:self];
+//    self.myFileObject = [FileObject new];
+//    self.myFileObject.delegate = self;
     NSString *path = [[NSBundle mainBundle] pathForResource:@"TestPDF" ofType:@"pdf"];
     NSURL *targetURL = [NSURL fileURLWithPath:path];
     NSDictionary* fileOne = @{@"title": @"Tax form 10B", @"memo": @"dsjkigurehpdsjovtviuyobinjvuboijnlk", @"file": targetURL};
@@ -100,7 +101,6 @@
         NSDictionary* folder = [Defaults getUserDefaultForKey:@"currentFolder"];
         cell.textLabel.text = folder[@"subfolders"][indexPath.row][@"name"];
         cell.folderID = folder[@"subfolders"][indexPath.row][@"id"];
-        //NSLog(@"%@", folder[@"subfolders"]);
         if ([folder[@"subfolders"] count] == 0)
         {
             NSLog(@"no more subFolders");
@@ -114,6 +114,7 @@
             case 1:
                 cell.textLabel.text = folder[@"documents"][indexPath.row][@"name"];
                 cell.cellFile = [FileObject initWithFile:folder[@"documents"][indexPath.row]];
+                //cell.cellFile.delegate = self;
                 break;
                 
             default:
@@ -162,20 +163,17 @@
     {
         FolderTableViewCell* cell = (FolderTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
         [self performSegueWithIdentifier:@"fileSegueID" sender:cell];
-        
     }
-
-    
 }
 
--(void)dataFetchComplete:(FileObject *)sender
+-(void)dataFetchComplete:(NSDictionary*)object
 {
-    NSLog(@"protocal worked");
+    NSLog(@"protocal still works");
 }
 
 -(void)dataFetchFailed
 {
-    NSLog(@"protocal worked");
+    NSLog(@"protocal still works");
 
 }
 
