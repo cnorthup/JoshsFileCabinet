@@ -8,13 +8,20 @@
 
 #import "FileObject.h"
 #import "Defaults.h"
+#import <QuartzCore/QuartzCore.h>
+#import <UIKit/UIKit.h>
+
 
 @interface FileObject ()
 
 @property NSString* fileID;
 @property NSDictionary* unparsedFile;
-@property NSString* fileMemo;
 @property BOOL filledOut;
+@property NSData* fileData;
+@property NSURL* fileUrl;
+@property NSURL* thumbnailUrl;
+@property NSDate*  created;
+@property id file;
 
 
 @end
@@ -34,6 +41,14 @@
     myFile.fileID = file[@"id"];
     myFile.folderName = file[@"folder_name"];
     myFile.filledOut = NO;
+    myFile.file = nil;
+    myFile.fileMemo = @"";
+    myFile.fileUrl = nil;
+    myFile.thumbnailUrl = nil;
+    myFile.unparsedFile = nil;
+    myFile.fileType = nil;
+    myFile.fileSize = 0.0;
+    myFile.created = nil;
     return myFile;
 }
 
@@ -43,7 +58,7 @@
 }
 
 
--(void)getFile:(FileObject*)file
+-(void)getFileData:(FileObject*)file
 {
     if (file != nil)
     {
@@ -56,11 +71,10 @@
             if (data != nil)
             {
                 NSLog(@"data was recieved");
-                //NSLog(@"%@", [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&connectionError]);
-                //file.filledOut = YES;
-                //file.file = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&connectionError];
                 NSDictionary* dictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&connectionError];
-                [self.delegate dataFetchComplete:dictionary];
+                file.unparsedFile = dictionary;
+                NSLog(@"%@", dictionary);
+                [self.delegate dataFetchComplete:[FileObject parseFile:file]];
             }
             else
             {
@@ -76,14 +90,74 @@
     }
 }
 
+-(void)getFileFromFileObject:(FileObject*)fileObject
+{
+    
+    NSData* pdfData = [[NSData alloc] initWithContentsOfURL:fileObject.fileUrl];
+    NSString *resourceDocPath = [[NSString alloc] initWithString:[[[[NSBundle mainBundle] resourcePath]stringByDeletingLastPathComponent]stringByAppendingPathComponent:@"Documents"]];
+    NSString *filePath = [resourceDocPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.pdf",fileObject.fileName]];
+    [pdfData writeToFile:filePath atomically:YES];
+    fileObject.file = filePath;
+    [self.delegate fileDataRecieved:fileObject.file];
+}
+
 +(FileObject*)parseFile:(FileObject*)file
 {
+    NSDictionary* dict =  file.unparsedFile;
+    file.fileUrl = [NSURL URLWithString:dict[@"file"][@"url"]];
+    file.thumbnailUrl = dict[@"file"][@"thumb"][@"url"];
+    file.fileMemo = dict[@"memo"];
+    if (file.fileMemo == nil)
+    {
+        file.fileMemo = @"";
+    }
+    file.folderName = dict[@"folder_name"];
+    file.fileSize = [dict[@"file_size"] floatValue];
+    NSDateFormatter* dateForm = [[NSDateFormatter alloc]init];
+    [dateForm setDateFormat:@"yyyy-MM-dd 'at' HH:mm"];
+    file.created = [dateForm dateFromString:dict[@"created_at"]];
+    file.fileType = dict[@"file_content_type"];
     return file;
 }
 
-+(NSString*)getMemo:(FileObject *)file
+#pragma --mark Setting/Getting methods
+
+
++(void)setMemo:(FileObject*)file
 {
-    return file.fileMemo;
+    
+}
+
++(void)setDateUpdated:(FileObject*)file
+{
+    
+}
+
++(void)deleteFile:(FileObject*)file
+{
+    
+}
+
++(void)createFile:(NSDictionary*)fileToCreate
+{
+    
+}
+
++(NSURL*)getFileUrl:(FileObject*)file
+{
+    return file.fileUrl;
+}
+
++(id)fileFromFileObject:(FileObject*)fileObject
+{
+    if (fileObject.file != nil) {
+        return fileObject.file;
+    }
+    
+    else
+    {
+        return nil;
+    }
 }
 
 

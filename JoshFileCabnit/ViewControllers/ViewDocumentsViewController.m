@@ -23,6 +23,9 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *myBackButton;
 @property FileObject* myFileObject;
 
+@property FolderTableViewCell* mySelectedCell;
+
+
 @end
 
 @implementation ViewDocumentsViewController
@@ -30,8 +33,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    self.myFileObject = [FileObject new];
-//    self.myFileObject.delegate = self;
+    self.myFileObject = [FileObject new];
+    self.myFileObject.delegate = self;
     NSString *path = [[NSBundle mainBundle] pathForResource:@"TestPDF" ofType:@"pdf"];
     NSURL *targetURL = [NSURL fileURLWithPath:path];
     NSDictionary* fileOne = @{@"title": @"Tax form 10B", @"memo": @"dsjkigurehpdsjovtviuyobinjvuboijnlk", @"file": targetURL};
@@ -114,7 +117,7 @@
             case 1:
                 cell.textLabel.text = folder[@"documents"][indexPath.row][@"name"];
                 cell.cellFile = [FileObject initWithFile:folder[@"documents"][indexPath.row]];
-                //cell.cellFile.delegate = self;
+                cell.cellFile.delegate = self;
                 break;
                 
             default:
@@ -162,13 +165,17 @@
     else if(indexPath.section == 1)
     {
         FolderTableViewCell* cell = (FolderTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
-        [self performSegueWithIdentifier:@"fileSegueID" sender:cell];
+        self.mySelectedCell = cell;
+        [cell.cellFile getFileData:cell.cellFile];
     }
 }
 
--(void)dataFetchComplete:(NSDictionary*)object
+#pragma --mark FileObject
+
+-(void)dataFetchComplete:(FileObject*)object
 {
-    NSLog(@"protocal still works");
+    self.mySelectedCell.cellFile = object;
+    [self performSegueWithIdentifier:@"fileSegueID" sender:self.mySelectedCell];
 }
 
 -(void)dataFetchFailed
@@ -176,6 +183,32 @@
     NSLog(@"protocal still works");
 
 }
+
+
+-(void)fileDataRecieved:(id)file
+{
+    
+}
+
+-(void)fileDataRecieveError
+{
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"ConnectionFailed" message:@"We are sorry but we could not retrieve the file you are looking for" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Retry", nil];
+    [alertView show];
+    
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0)
+    {
+        
+    }
+    else
+    {
+        [self.mySelectedCell.cellFile getFileData:self.mySelectedCell.cellFile];
+    }
+}
+
 
 - (IBAction)didPressBackButton:(id)sender
 {

@@ -33,6 +33,7 @@
     self.fileNameTextField.enabled = NO;
     self.folderNameTextField.enabled = NO;
     self.myFile.delegate = self;
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -41,21 +42,21 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    [self.myFile getFile:self.myFile];
-
+    self.fileNameTextField.text = self.myFile.fileName;
+    self.folderNameTextField.text = self.myFile.folderName;
     CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
     NSLog(@"%f",screenRect.size.height);
-    if (screenRect.size.height == 548)
-    {
-        self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, 479);
-        self.memoTextView.frame = CGRectMake(self.memoTextView.frame.origin.x, self.memoTextView.frame.origin.y, self.memoTextView.frame.size.width, 257+88);
-    }
-    else
-    {
-        self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, 391);
-        //self.memoTextView.frame = CGRectMake(self.memoTextView.frame.origin.x, self.memoTextView.frame.origin.y, self.memoTextView.frame.size.width, 257-69);
-    }
-    [self.myFile getFile:self.myFile];
+//    if (screenRect.size.height == 548)
+//    {
+//        self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, 479);
+//        self.memoTextView.frame = CGRectMake(self.memoTextView.frame.origin.x, self.memoTextView.frame.origin.y, self.memoTextView.frame.size.width, 257+88);
+//    }
+//    else
+//    {
+//        self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, 391);
+//        //self.memoTextView.frame = CGRectMake(self.memoTextView.frame.origin.x, self.memoTextView.frame.origin.y, self.memoTextView.frame.size.width, 257-69);
+//    }
+//    [self.myFile getFileData:self.myFile];
     NSLog(@"%f", self.memoTextView.frame.size.height);
 }
 
@@ -66,17 +67,29 @@
 
 #pragma mark-- FileObject
 
--(void)dataFetchComplete:(NSDictionary*)object
+-(void)dataFetchComplete:(FileObject*)object
 {
-    NSLog(@"%@", object);
+    self.myFile = object;
+    [self.myFile getFileFromFileObject:self.myFile];
 }
 
 -(void)dataFetchFailed
 {
-    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"ConnectionFailed" message:@"We are sorry but we could not retrieve the file you are looking for" delegate:self cancelButtonTitle:@"Go back" otherButtonTitles:@"Retry", nil];
-    [alertView show];
+//    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"ConnectionFailed" message:@"We are sorry but we could not retrieve the file you are looking for" delegate:self cancelButtonTitle:@"Go back" otherButtonTitles:@"Retry", nil];
+//    [alertView show];
 }
 
+-(void)fileDataRecieved:(id)file
+{
+    [self showFile:file];
+}
+
+-(void)fileDataRecieveError
+{
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"ConnectionFailed" message:@"We are sorry but we could not retrieve the file you are looking for" delegate:self cancelButtonTitle:@"Go back" otherButtonTitles:@"Retry", nil];
+    [alertView show];
+    
+}
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 0)
@@ -85,7 +98,7 @@
     }
     else
     {
-        [self.myFile getFile:self.myFile];
+        [self.myFile getFileData:self.myFile];
     }
 }
 
@@ -107,7 +120,7 @@
             break;
             
         case 2:
-            [self showFile];
+            [self.myFile getFileFromFileObject:self.myFile];
             self.saveButton.hidden = YES;
             self.memoTextView.editable = NO;
             self.fileNameTextField.enabled = NO;
@@ -131,10 +144,10 @@
     }
 }
 
--(void)showFile
+-(void)showFile:(NSString*)filePath
 {
     NSString *path = [[NSBundle mainBundle] pathForResource:@"TestPDF" ofType:@"pdf"];
-    NSURL *targetURL = [NSURL fileURLWithPath:path];
+    NSURL *targetURL = [NSURL fileURLWithPath:filePath];
     UIDocumentInteractionController* docController = [UIDocumentInteractionController interactionControllerWithURL:targetURL];
     docController.delegate = self;
     [docController presentPreviewAnimated:YES];

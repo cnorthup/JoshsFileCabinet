@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreFoundation/CoreFoundation.h>
 
 @class FileObject;
 
@@ -14,8 +15,12 @@
 
 @required
 
--(void)dataFetchComplete:(NSDictionary*)object;
+-(void)fileDataRecieved:(id)file;
+-(void)fileDataRecieveError;
+-(void)dataFetchComplete:(FileObject*)object;
 -(void)dataFetchFailed;
+
+@optional
 
 @end
 
@@ -24,13 +29,32 @@
 @property NSString* fileName;
 @property NSString* folderName;
 @property NSString* fileType;
-@property float* fileSize;
+@property float fileSize;
+@property NSString* updatedLast;
+@property NSString* fileMemo;
 
 @property (nonatomic, weak) id <FileObjectDelegate> delegate;
 
+-(void)getFileData:(FileObject*)file;
+-(void)getFileFromFileObject:(FileObject*)fileObject;
+
 +(FileObject*)initWithFile:(NSDictionary*)file;
 +(void)checkDelegate:(FileObject*)sender;
--(void)getFile:(FileObject*)file;
-+(NSString*)getMemo:(FileObject*)file;
++(NSURL*)getFileUrl:(FileObject*)file;
+
+
+
++(id)fileFromFileObject:(FileObject*)fileObject;
++(void)createFile:(NSDictionary*)fileToCreate;
++(void)deleteFile:(FileObject*)file;
++(void)setDateUpdated:(FileObject*)file;
++(void)setMemo:(FileObject*)file;
+
+
+
+
+
+
+
 
 @end

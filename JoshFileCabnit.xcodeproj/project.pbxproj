@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		560915DB19ACE7D1005071DD /* TestPDF.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 560915DA19ACE7D1005071DD /* TestPDF.pdf */; };
+		5611BDDB19DC7B5100361CA2 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5611BDDA19DC7B5100361CA2 /* CoreFoundation.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		561A7F0D19AB8D4400A7006C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 561A7F0C19AB8D4400A7006C /* main.m */; };
 		561A7F1019AB8D4400A7006C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 561A7F0F19AB8D4400A7006C /* AppDelegate.m */; };
 		561A7F1319AB8D4400A7006C /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 561A7F1219AB8D4400A7006C /* MainViewController.m */; };
@@ -38,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		560915DA19ACE7D1005071DD /* TestPDF.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = TestPDF.pdf; path = "../../../Library/Mobile Documents/com~apple~Preview/Documents/TestPDF.pdf"; sourceTree = "<group>"; };
+		5611BDDA19DC7B5100361CA2 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		561A7F0719AB8D4400A7006C /* JoshFileCabnit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JoshFileCabnit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		561A7F0B19AB8D4400A7006C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		561A7F0C19AB8D4400A7006C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5611BDDB19DC7B5100361CA2 /* CoreFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,6 +99,7 @@
 				561A7F0919AB8D4400A7006C /* JoshFileCabnit */,
 				561A7F2019AB8D4400A7006C /* JoshFileCabnitTests */,
 				561A7F0819AB8D4400A7006C /* Products */,
+				5611BDDA19DC7B5100361CA2 /* CoreFoundation.framework */,
 			);
 			sourceTree = "<group>";
 		};
