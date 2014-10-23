@@ -46,17 +46,6 @@
     self.folderNameTextField.text = self.myFile.folderName;
     CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
     NSLog(@"%f",screenRect.size.height);
-//    if (screenRect.size.height == 548)
-//    {
-//        self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, 479);
-//        self.memoTextView.frame = CGRectMake(self.memoTextView.frame.origin.x, self.memoTextView.frame.origin.y, self.memoTextView.frame.size.width, 257+88);
-//    }
-//    else
-//    {
-//        self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, 391);
-//        //self.memoTextView.frame = CGRectMake(self.memoTextView.frame.origin.x, self.memoTextView.frame.origin.y, self.memoTextView.frame.size.width, 257-69);
-//    }
-//    [self.myFile getFileData:self.myFile];
     NSLog(@"%f", self.memoTextView.frame.size.height);
 }
 
@@ -147,6 +136,7 @@
 -(void)showFile:(NSString*)filePath
 {
     NSString *path = [[NSBundle mainBundle] pathForResource:@"TestPDF" ofType:@"pdf"];
+    NSLog(@"the test path is %@", path);
     NSURL *targetURL = [NSURL fileURLWithPath:filePath];
     UIDocumentInteractionController* docController = [UIDocumentInteractionController interactionControllerWithURL:targetURL];
     docController.delegate = self;

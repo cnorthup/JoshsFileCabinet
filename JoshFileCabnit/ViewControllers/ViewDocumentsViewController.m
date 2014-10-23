@@ -60,11 +60,13 @@
             if ([[Defaults getUserDefaultForKey:@"atTopLevel"] boolValue])
             {
                 self.myBackButton.enabled = NO;
+                [self.myBackButton setTitle:@""];
                 return [[Defaults getUserDefaultForKey:@"documents"] count];
             }
             else
             {
                 self.myBackButton.enabled = YES;
+                [self.myBackButton setTitle:@"Back"];
                 return [[[Defaults getUserDefaultForKey:@"currentFolder"]objectForKey:@"subfolders"] count];
                 
             }
@@ -74,11 +76,13 @@
             if ([[Defaults getUserDefaultForKey:@"atTopLevel"] boolValue])
             {
                 self.myBackButton.enabled = NO;
+                [self.myBackButton setTitle:@""];
                 return 0;
             }
             else
             {
                 self.myBackButton.enabled = YES;
+                [self.myBackButton setTitle:@"Back"];
                 return [[[Defaults getUserDefaultForKey:@"currentFolder"]objectForKey:@"documents"] count];
                 
             }

@@ -92,12 +92,10 @@
 
 -(void)getFileFromFileObject:(FileObject*)fileObject
 {
-    
     NSData* pdfData = [[NSData alloc] initWithContentsOfURL:fileObject.fileUrl];
-    NSString *resourceDocPath = [[NSString alloc] initWithString:[[[[NSBundle mainBundle] resourcePath]stringByDeletingLastPathComponent]stringByAppendingPathComponent:@"Documents"]];
-    NSString *filePath = [resourceDocPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.pdf",fileObject.fileName]];
-    [pdfData writeToFile:filePath atomically:YES];
-    fileObject.file = filePath;
+    NSString *resourceDocPath = [[NSString alloc]initWithString:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.pdf", fileObject.fileName]]];
+    [pdfData writeToFile:resourceDocPath atomically:YES];
+    fileObject.file = resourceDocPath;
     [self.delegate fileDataRecieved:fileObject.file];
 }
 
@@ -141,6 +139,13 @@
 +(void)createFile:(NSDictionary*)fileToCreate
 {
     
+    NSData* json = [NSJSONSerialization dataWithJSONObject:fileToCreate options:NSJSONWritingPrettyPrinted error:nil];
+    
+    NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"http://taxzoc.herokuapp.com/api/documents/%@?email=%@",fileToCreate[@"id"], [Defaults getUserDefaultForKey:@"email"]]];
+    
+    NSMutableURLRequest* request = [[NSMutableURLRequest alloc]initWithURL:url];
+    [request addValue:[NSString stringWithFormat:@"Token token=%@",[Defaults getUserDefaultForKey:@"authorizationToken"]] forHTTPHeaderField:@"Authorization"];
+    [request addValue:@"application/json" forHTTPHeaderField:@"Conten-Type"];
 }
 
 +(NSURL*)getFileUrl:(FileObject*)file

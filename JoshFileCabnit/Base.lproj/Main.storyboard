@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6154.21" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6153.13"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Main View Controller-->
@@ -16,25 +17,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <containerView opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o2X-E8-BdM">
+                            <containerView opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o2X-E8-BdM">
                                 <rect key="frame" x="0.0" y="49" width="320" height="391"/>
                             </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x9g-im-G6p">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x9g-im-G6p">
                                 <rect key="frame" x="110" y="448" width="101" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="gqg-uS-2jC"/>
+                                </constraints>
                                 <state key="normal" title="Help and FAQ">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sWf-K5-rT8">
+                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sWf-K5-rT8">
                                 <rect key="frame" x="57" y="454" width="45" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="2YX-ih-fm5"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                <state key="normal" title="Legend">
-                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
+                                <state key="normal" title="Legend"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sX4-IC-WgQ">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sX4-IC-WgQ">
                                 <rect key="frame" x="219" y="454" width="81" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="H9a-Rb-FR9"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <state key="normal" title="Privacy Policy"/>
                             </button>
@@ -51,6 +58,13 @@
                             </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" red="0.078431375319999996" green="0.79215693470000004" blue="0.074509806930000005" alpha="1" colorSpace="deviceRGB"/>
+                        <constraints>
+                            <constraint firstItem="jKR-0b-wOs" firstAttribute="top" secondItem="x9g-im-G6p" secondAttribute="bottom" constant="2" id="4fD-F1-7Dg"/>
+                            <constraint firstItem="jKR-0b-wOs" firstAttribute="top" secondItem="sX4-IC-WgQ" secondAttribute="bottom" constant="8" id="5VP-D1-ZuQ"/>
+                            <constraint firstItem="o2X-E8-BdM" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" constant="49" id="6LK-RD-IzX"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="o2X-E8-BdM" secondAttribute="bottom" constant="40" id="Iys-ZD-YGR"/>
+                            <constraint firstItem="jKR-0b-wOs" firstAttribute="top" secondItem="sWf-K5-rT8" secondAttribute="bottom" constant="8" id="Lyv-OJ-Dog"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="containterView" destination="o2X-E8-BdM" id="Yqc-1S-5vN"/>
@@ -64,7 +78,7 @@
             </objects>
             <point key="canvasLocation" x="290" y="362"/>
         </scene>
-        <!--View Documents View Controller - My Folders-->
+        <!--My Folders-->
         <scene sceneID="xdl-2D-8cv">
             <objects>
                 <viewController storyboardIdentifier="ViewDocumentsViewController" id="ec6-z5-9oh" customClass="ViewDocumentsViewController" sceneMemberID="viewController">
@@ -80,7 +94,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ViewDocumentsCellID" id="O5h-Fu-c45" customClass="FolderTableViewCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ViewDocumentsCellID" id="O5h-Fu-c45" customClass="FolderTableViewCell">
                                         <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="O5h-Fu-c45" id="BWk-xh-cnT">
@@ -95,7 +109,6 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="My Folders" id="ED8-PH-O9q">
                         <barButtonItem key="leftBarButtonItem" title="Back" id="vJO-Uo-hiP">
@@ -114,7 +127,7 @@
             </objects>
             <point key="canvasLocation" x="1566" y="128"/>
         </scene>
-        <!--Folder View Controller - Document-->
+        <!--Document-->
         <scene sceneID="G84-mN-Z9J">
             <objects>
                 <viewController id="Gv0-NJ-Jcn" customClass="FolderViewController" sceneMemberID="viewController">
@@ -130,7 +143,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="FolderReuseCellID" id="FHG-dI-AMr">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="FolderReuseCellID" id="FHG-dI-AMr">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FHG-dI-AMr" id="OOq-oc-SFG">
@@ -194,7 +207,6 @@
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="USr-Nm-KEZ">
                                 <rect key="frame" x="20" y="203" width="240" height="257"/>
-                                <color key="backgroundColor" red="1" green="0.50217481019999999" blue="0.0020682545409999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <connections>
@@ -211,7 +223,7 @@
                     <navigationItem key="navigationItem" id="Uck-Q1-MRZ">
                         <nil key="title"/>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="Fpv-mU-aSv">
-                            <rect key="frame" x="8" y="7.5" width="261" height="29"/>
+                            <rect key="frame" x="8" y="7.5" width="260" height="29"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
                                 <segment title="Read"/>
@@ -289,7 +301,7 @@
                                 <rect key="frame" x="0.0" y="50" width="320" height="430"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CheckListReuseCellID" rowHeight="131" id="GFi-yT-kaZ" customClass="CheckListPrototypeCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CheckListReuseCellID" rowHeight="131" id="GFi-yT-kaZ" customClass="CheckListPrototypeCell">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GFi-yT-kaZ" id="ksX-fx-MWa">

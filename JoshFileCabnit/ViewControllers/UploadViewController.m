@@ -7,6 +7,9 @@
 //
 
 #import "UploadViewController.h"
+#import <QuartzCore/QuartzCore.h>
+#import <CoreGraphics/CoreGraphics.h>
+
 
 @interface UploadViewController ()
 
@@ -17,6 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self upload];
 
 }
 
@@ -24,6 +28,22 @@
 {
     
 }
+
+-(void)upload
+{
+    NSMutableDictionary* file = [NSMutableDictionary new];
+    [file setValue:@"newFile" forKey:@"name"];
+    [file setValue:@"75" forKey:@"id"];
+    [file setValue:@"memo" forKey:@"memo"];
+    [file setValue:@"1" forKey:@"folder_id"];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"TestPDF" ofType:@"pdf"];
+    NSURL* url = [NSURL URLWithString:path];
+    [file setValue:CFBridgingRelease(CGPDFDocumentCreateWithURL(CFURLCreateFilePathURL(kCFAllocatorDefault, (__bridge CFURLRef)(url), nil))) forKey:@"file"];
+
+
+    NSLog(@"%@", file);
+}
+
 
 - (IBAction)onSelectFromLibaryPressed:(id)sender
 {
