@@ -157,6 +157,7 @@
         [Defaults setUserDefault:myData forkey:@"documents"];
         NSLog(@"the response it type %@", [[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&connectionError] class]);
         NSLog(@"%@", [myData.firstObject class]);
+        //NSLog(@"%@", myData);
     }];
 }
 

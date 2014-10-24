@@ -133,19 +133,26 @@
 
 +(void)deleteFile:(FileObject*)file
 {
+    //DELETE http://localhost:3000/api/documents/156?email=josh@gmail.com
     
 }
 
-+(void)createFile:(NSDictionary*)fileToCreate
++(void)createFile:(NSMutableDictionary*)fileToCreate
 {
-    
     NSData* json = [NSJSONSerialization dataWithJSONObject:fileToCreate options:NSJSONWritingPrettyPrinted error:nil];
-    
-    NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"http://taxzoc.herokuapp.com/api/documents/%@?email=%@",fileToCreate[@"id"], [Defaults getUserDefaultForKey:@"email"]]];
+    NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"http://taxzoc.herokuapp.com/api/documents?email=%@", [Defaults getUserDefaultForKey:@"email"]]];
     
     NSMutableURLRequest* request = [[NSMutableURLRequest alloc]initWithURL:url];
     [request addValue:[NSString stringWithFormat:@"Token token=%@",[Defaults getUserDefaultForKey:@"authorizationToken"]] forHTTPHeaderField:@"Authorization"];
-    [request addValue:@"application/json" forHTTPHeaderField:@"Conten-Type"];
+    [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:json];
+    [request setHTTPMethod:@"POST"];
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        NSLog(@"%@", connectionError);
+        NSLog(@"%@", response);
+    }];
+    
+    //api/documents?email=josh@gmail.com
 }
 
 +(NSURL*)getFileUrl:(FileObject*)file
