@@ -145,6 +145,7 @@
     NSMutableURLRequest* request = [[NSMutableURLRequest alloc]initWithURL:url];
     [request addValue:[NSString stringWithFormat:@"Token token=%@",[Defaults getUserDefaultForKey:@"authorizationToken"]] forHTTPHeaderField:@"Authorization"];
     [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
     [request setHTTPBody:json];
     [request setHTTPMethod:@"POST"];
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {

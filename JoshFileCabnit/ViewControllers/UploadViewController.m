@@ -35,17 +35,19 @@
     NSMutableDictionary* file = [NSMutableDictionary new];
     NSMutableDictionary* document = [NSMutableDictionary new];
     [document setValue:@"newFile" forKey:@"name"];
-    [document setValue:@"75" forKey:@"id"];
+    //[document setValue:@"75" forKey:@"id"];
     [document setValue:@"memo" forKey:@"memo"];
     [document setValue:@"1" forKey:@"folder_id"];
     
     NSString *path = [[NSBundle mainBundle] pathForResource:@"TestPDF" ofType:@"pdf"];
     NSURL* url = [NSURL fileURLWithPath:path];
-    [document setObject:[NSString stringWithContentsOfURL:url encoding:NSStringEncodingConversionAllowLossy error:nil] forKey:@"file"];
+    //[document setObject:[NSData dataWithContentsOfFile:path] forKey:@"file"];
+    [document setObject:[NSString stringWithContentsOfFile:path encoding:NSStringEncodingConversionAllowLossy error:nil] forKey:@"file"];
+    //[document setObject:[NSString stringWithContentsOfURL:url encoding:NSStringEncodingConversionAllowLossy error:nil] forKey:@"file"];
     
     [file setObject:document forKey:@"document"];
     
-    [FileObject createFile:file];
+    [FileObject createFile:document];
 }
 
 
