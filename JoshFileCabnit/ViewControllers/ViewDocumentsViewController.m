@@ -163,6 +163,7 @@
                                     @"placeInFolders"]];
         
         [Defaults findPlaceInFolders];
+        [self setTitleForFolder];
         [self.myTableView reloadData];
     }
     
@@ -234,7 +235,19 @@
                                     @"placeInFolders"]];
     }
     [Defaults findPlaceInFolders];
+    [self setTitleForFolder];
     [self.myTableView reloadData];
+}
+
+-(void)setTitleForFolder
+{
+    NSNumber* atTop = [Defaults getUserDefaultForKey:@"atTopLevel"];
+    if (atTop.intValue == 1) {
+        self.title = @"MyFolders";
+    }
+    else{
+        self.title = [Defaults getUserDefaultForKey:@"currentFolder"][@"name"];
+    }
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(FolderTableViewCell*)sender

@@ -29,7 +29,7 @@
 +(void)setUserDefault:(id)object forkey:(NSString *)key
 {
     NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setObject:object forKey:key];
+    //[userDefaults setObject:object forKey:key];
     [userDefaults synchronize];
 }
 
