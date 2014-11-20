@@ -10,6 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import <CoreGraphics/CoreGraphics.h>
 #import "FileObject.h"
+#import "Defaults.h"
 
 
 @interface UploadViewController ()
@@ -42,10 +43,16 @@
     NSString *path = [[NSBundle mainBundle] pathForResource:@"TestPDF" ofType:@"pdf"];
     NSURL* url = [NSURL fileURLWithPath:path];
     //[document setObject:[NSData dataWithContentsOfFile:path] forKey:@"file"];
-    [document setObject:[NSString stringWithContentsOfFile:path encoding:NSStringEncodingConversionAllowLossy error:nil] forKey:@"file"];
+
+    //[document setObject:[NSString stringWithContentsOfFile:path encoding:NSStringEncodingConversionAllowLossy error:nil] forKey:@"file"];
     //[document setObject:[NSString stringWithContentsOfURL:url encoding:NSStringEncodingConversionAllowLossy error:nil] forKey:@"file"];
     
-    [file setObject:document forKey:@"document"];
+    UIImage* image = [UIImage imageNamed:@"bear"];
+    NSData *picData = UIImageJPEGRepresentation(image, 1.0);
+    
+    //NSString* stringData = [[NSString alloc] initWithData:picData encoding:NSUTF32StringEncoding];
+    NSString* base64 = [picData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    [document setObject:base64 forKey:@"file"];
     
     [FileObject createFile:document];
 }

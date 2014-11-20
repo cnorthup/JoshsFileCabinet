@@ -150,7 +150,9 @@
     [request setHTTPMethod:@"POST"];
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         NSLog(@"%@", connectionError);
-        NSLog(@"%@", response);
+        NSLog(@"the response is %@", response);
+        //NSString* string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        //NSLog(@"%@", string);
     }];
     
     //api/documents?email=josh@gmail.com
