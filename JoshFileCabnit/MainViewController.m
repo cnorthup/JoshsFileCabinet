@@ -45,7 +45,7 @@
     
     NSString* tempEmail = @"cpa@example.com";
     
-    [Defaults setUserDefault:tempEmail forkey:@"email"];
+    [Defaults setUserDefault:@"cpa@example.com" forkey:@"email"];
 
 
     //self.myDocumentsUrl = [NSURL URLWithString:@"http://taxzoc.herokuapp.com/api/folders?email=cpa@example.com"];
@@ -61,13 +61,19 @@
 
 -(void)login:(NSString*)email password:(NSString*)password
 {
-    self.myLoginUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://taxzoc.herokuapp.com/api/authentication_tokens?email=%@&password=%@", email, password]];
+    //self.myLoginUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://taxzoc.herokuapp.com/api/authentication_tokens?email=%@&password=%@", email, password]];
+    //self.myLoginUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://taxzoc.herokuapp.com/api/authentication_tokens?email=cpa@example.com&password=password"]];
+    self.myLoginUrl = [NSURL URLWithString:@"http://taxzoc.herokuapp.com/api/authentication_tokens?email=cpa@example.com&password=password"];
     
-    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:self.myLoginUrl cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
+    
+    
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:self.myLoginUrl];
+    //NSURLRequest* request = [NSURLRequest requestWithURL:self.myLoginUrl];
     [request setHTTPMethod:@"POST"];
     
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         NSError* error = [NSError new];
+        NSLog(@"%@", response);
         NSDictionary* myData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
         NSLog(@"%@", [[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error] class]);
         NSLog(@"%@", data.class);
@@ -75,7 +81,8 @@
         NSLog(@"%@", myData);
         
         [Defaults setUserDefaults:@[myData[@"auth_token"], [NSDate new]] forKeys:@[@"authorizationToken", @"lastTokenReceived"]];
-        [MainViewController getDocuments:email];
+        [MainViewController getDocuments:[Defaults getUserDefaultForKey:@"email"]];
+        [UploadViewController upload];
     }];
     
     
@@ -155,7 +162,7 @@
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         NSArray* myData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&connectionError];
         [Defaults setUserDefault:myData forkey:@"documents"];
-        NSLog(@"the response it type %@", [[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&connectionError] class]);
+        NSLog(@"the response it type %@", myData);
         NSLog(@"%@", [myData.firstObject class]);
         //NSLog(@"%@", myData);
     }];

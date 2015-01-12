@@ -22,7 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self upload];
+    //[UploadViewController upload];
 
 }
 
@@ -31,30 +31,26 @@
     
 }
 
--(void)upload
++(void)upload
 {
+    NSLog(@"uploading");
     NSMutableDictionary* file = [NSMutableDictionary new];
     NSMutableDictionary* document = [NSMutableDictionary new];
-    [document setValue:@"newFile" forKey:@"name"];
-    //[document setValue:@"75" forKey:@"id"];
+    [document setValue:@"James" forKey:@"name"];
     [document setValue:@"memo" forKey:@"memo"];
     [document setValue:@"1" forKey:@"folder_id"];
     
     NSString *path = [[NSBundle mainBundle] pathForResource:@"TestPDF" ofType:@"pdf"];
-    NSURL* url = [NSURL fileURLWithPath:path];
-    //[document setObject:[NSData dataWithContentsOfFile:path] forKey:@"file"];
-
-    //[document setObject:[NSString stringWithContentsOfFile:path encoding:NSStringEncodingConversionAllowLossy error:nil] forKey:@"file"];
-    //[document setObject:[NSString stringWithContentsOfURL:url encoding:NSStringEncodingConversionAllowLossy error:nil] forKey:@"file"];
     
     UIImage* image = [UIImage imageNamed:@"bear"];
     NSData *picData = UIImageJPEGRepresentation(image, 1.0);
-    
-    //NSString* stringData = [[NSString alloc] initWithData:picData encoding:NSUTF32StringEncoding];
     NSString* base64 = [picData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+
     [document setObject:base64 forKey:@"file"];
-    
-    [FileObject createFile:document];
+    [file setObject:document forKey:@"document"];
+    //NSLog(@"%@", file);
+
+    [FileObject createFile:file];
 }
 
 

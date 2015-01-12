@@ -43,7 +43,6 @@
 +(NSURL*)getFileUrl:(FileObject*)file;
 
 
-
 +(id)fileFromFileObject:(FileObject*)fileObject;
 +(void)createFile:(NSDictionary*)fileToCreate;
 +(void)deleteFile:(FileObject*)file;

@@ -10,5 +10,7 @@
 
 @interface UploadViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIDocumentPickerDelegate>
 
++(void)upload;
+
 
 @end
