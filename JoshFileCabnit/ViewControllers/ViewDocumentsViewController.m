@@ -106,11 +106,14 @@
     else
     {
         NSDictionary* folder = [Defaults getUserDefaultForKey:@"currentFolder"];
-        cell.textLabel.text = folder[@"subfolders"][indexPath.row][@"name"];
-        cell.folderID = folder[@"subfolders"][indexPath.row][@"id"];
         if ([folder[@"subfolders"] count] == 0)
         {
             NSLog(@"no more subFolders");
+        }
+        else
+        {
+            cell.textLabel.text = folder[@"subfolders"][indexPath.row][@"name"];
+            cell.folderID = folder[@"subfolders"][indexPath.row][@"id"];
         }
         switch (indexPath.section) {
             case 0:

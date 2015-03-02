@@ -139,8 +139,8 @@
 
 +(void)createFile:(NSMutableDictionary*)fileToCreate
 {
-    [self sendPicture];
-    [self uploadImage];
+    //[self sendPicture];
+    //[self uploadImage];
     NSData* json = [NSJSONSerialization dataWithJSONObject:fileToCreate options:NSJSONWritingPrettyPrinted error:nil];
     NSData* newData = [fileToCreate.description dataUsingEncoding:NSUTF8StringEncoding];
     NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"http://taxzoc.herokuapp.com/api/documents?email=%@", [Defaults getUserDefaultForKey:@"email"]]];
@@ -166,6 +166,7 @@
 
     UIImage* image = [UIImage imageNamed:@"bear"];
     NSData* imageData = UIImageJPEGRepresentation(image, 1.0);
+    NSString* imageString = [imageData base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
     
     NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"http://taxzoc.herokuapp.com/api/documents?email=cpa@example.com"]];
     
@@ -173,23 +174,71 @@
     [request addValue:[NSString stringWithFormat:@"Token token=%@",[Defaults getUserDefaultForKey:@"authorizationToken"]] forHTTPHeaderField:@"Authorization"];
     
     
-    NSString *boundary = @"---------FileCabnitBoundry";
+    NSString *boundary = @"-----------------------------FileCabnitBoundry";
     NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary];
     NSString *accept = @"application/json";
     
-    [request addValue:contentType forHTTPHeaderField: @"Content-Type"];
+    //[request addValue:[NSString stringWithFormat:@"application/json"] forHTTPHeaderField: @"Content-Type"];
     //[request setValue:accept forHTTPHeaderField: @"Accept"];
     [request setHTTPMethod:@"POST"];
+    
+    //[request setValue:contentType forHTTPHeaderField:@"Content-Type"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    //[request setValue:@"application/json" forHTTPHeaderField: @"Accept"];
+
+
 //
-//    
+//
+    
     NSMutableData *body = [NSMutableData data];
     
-    [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"image\"; filename=\"bla.jpg\"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    //[body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    //[body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"image\"; filename=\"bear.jpg\"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
   //  [body appendData:[@"Content-Type: image/jpg\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[@"Content-Type: application/octet-stream\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    //[body appendData:[@"Content-Type: application/json\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+   // [body appendData:[[NSString stringWithFormat:@"\r\n--\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    //[body appendData:[@"Accept: application/json\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    //[body appendData:[[NSString stringWithFormat:@"\r\n--\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
 
-    [body appendData:[NSData dataWithData:imageData]];
+    NSDictionary* documentDictionary = @{@"name" : @"SecondBearFile", @"memo" : @"This is a test", @"folder_id" : @"11", @"file": imageString};
+    
+    NSDictionary* fileDictionary = @{@"document" : documentDictionary};
+    NSError* error = [NSError new];
+    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:fileDictionary options:kNilOptions error:&error];
+    NSData *myData = [NSKeyedArchiver archivedDataWithRootObject:fileDictionary];
+    
+    NSURLSession* urlSession = [NSURLSession sharedSession];
+    
+    [urlSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        
+    }];
+    
+    if ([NSJSONSerialization isValidJSONObject:fileDictionary])
+    {
+        NSLog(@"yes");
+        [body appendData:[NSData dataWithData:jsonData]];
+        //[body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+        [request setHTTPBody:body];
+        [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+            //NSLog(@"response for different method %@", response);
+            NSString* string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            //NSLog(@"data is %@", string);
+            
+        }];
+        [urlSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+            NSLog(@"response from session %@", data);
+        }];
+        
+    }
+    else
+    {
+        NSLog(@"no");
+    }
+    
+
+
+    
+    //[body appendData:[NSData dataWithContentsOfFile:@""]];
     
    // [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
    /// NSString* kioskID = @"WEBrick/1.3.1";
@@ -197,13 +246,7 @@
     
     //[body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     
-    [request setHTTPBody:body];
-    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-        NSLog(@"response for different method %@", response);
-        NSString* string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        //NSLog(@"data is %@", string);
 
-    }];
     
 //    NSMutableData *body = [NSMutableData data];
 //    
